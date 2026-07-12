@@ -20,12 +20,11 @@ The file has a single `locations` array. Fields:
 - `lat`, `lng` (required): verified coordinates
 - `dogFriendly` (optional boolean): only set when the place's actual
   policy has been checked (search it); never guess. Leave unset if
-  unknown. Capture leash/seasonal conditions in `notes`.
+  unknown.
 - `area` (optional): town/area, e.g. `"Provincetown"` — used for
   future filtering; specific spots in the same town share an `area`
 - `coordsVerified` (optional, `false`): set when a precise geocode
   couldn't be found and `lat`/`lng` are an address-based estimate.
-  Mention it in `notes` too.
 - `website` (optional)
 - `photoAlbum` (optional): the "view full album" link. Public case: a
   `photos.app.goo.gl` shareable link (also used as the cover source).
@@ -46,7 +45,10 @@ The file has a single `locations` array. Fields:
 - Cover harvesting at deploy time into `src/data/photos.json` prefers
   `coverPhotoLink`, falling back to `photoAlbum`; cover changes appear
   after the next deploy.
-- `notes` (optional): address, hours, tips
+- `notes` (optional): **only ever set from the user's own words.** Never
+  auto-generate descriptive text (addresses, hours, caveats) on your
+  own initiative — omit the field unless the user explicitly dictates
+  what to put there.
 - `activities` (optional array): may be empty — a location can be just
   a saved place
 
@@ -65,8 +67,8 @@ The file has a single `locations` array. Fields:
 2. **Verify coordinates — never guess.** Web-search the place's
    address, then derive lat/lng. If a precise geocode truly can't be
    found after a reasonable search, use a best estimate, set
-   `"coordsVerified": false`, and say so in `notes` and to the user —
-   don't present a guess as verified.
+   `"coordsVerified": false`, and say so to the user — don't present a
+   guess as verified.
 3. **`dogFriendly` is opt-in, not default.** Only set it when checked;
    otherwise omit the field entirely.
 4. **One location, many activities.** If the place already exists in
@@ -74,6 +76,9 @@ The file has a single `locations` array. Fields:
    location.
 5. **Reuse `type` and `category` values** already present in the file
    when they fit.
+6. **Never auto-generate `notes`.** Don't add your own descriptive
+   text — addresses, hours, tips, caveats — as `notes`. If the user
+   didn't dictate specific text for it, leave the field out.
 
 ## Steps
 

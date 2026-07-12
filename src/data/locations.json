@@ -30,7 +30,6 @@
       "website": "https://cuffys.com/",
       "photoAlbum": "https://photos.google.com/album/AF1QipNzRc_LbYkTUgQnmlffK7S5zMydLmUrn-1iJ2-R",
       "coverPhotoLink": "https://photos.app.goo.gl/ZajG2ntcc19WxKhU9",
-      "notes": "721 Main St (Route 28) - flagship boardwalk store: shopping emporium, general store, confectionary, resort wear. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
       "activities": [
         {
           "title": "Shopping",
@@ -49,7 +48,6 @@
       "website": "https://www.provincetownghosttours.com/",
       "photoAlbum": "https://photos.google.com/album/AF1QipNHSxxWXVDigti32WGQXOWPfms_8BWJwOU5_lJS",
       "coverPhotoLink": "https://photos.app.goo.gl/z19gPeBtdzUrSVk79",
-      "notes": "Meets at The Coffee Pot, 315 Commercial St. 90-minute walking tour through the historic district and old cemeteries. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
       "activities": [
         {
           "title": "Ghost tour",
@@ -83,7 +81,6 @@
       "website": "https://captainbakerdonuts.com/",
       "photoAlbum": "https://photos.google.com/album/AF1QipPVaJSCbPh9a7KoXRQYPy1_IscrciPhUMAT9jY3",
       "coverPhotoLink": "https://photos.app.goo.gl/1Mj6sXbA2xk4iTnH9",
-      "notes": "485 Main St (Route 28). Open 7am-noon.",
       "activities": [
         {
           "title": "Breakfast",
@@ -101,7 +98,6 @@
       "website": "https://capecodpirateadventures.com/",
       "photoAlbum": "https://photos.google.com/album/AF1QipPgcI0QjI6zUR6k57M9mj4bOtI3Gmu8UdBA3bkU",
       "coverPhotoLink": "https://photos.app.goo.gl/8mAzoBj8XnMHVKNJA",
-      "notes": "180 Ocean St, Hyannis Harbor.",
       "activities": [
         {
           "title": "Interactive pirate cruise for children",
@@ -153,7 +149,6 @@
       "lng": -70.161,
       "photoAlbum": "https://photos.google.com/album/AF1QipPfejuMORuYDD_beoEVnw9XgA7Ip1xA6DYU-rM3",
       "coverPhotoLink": "https://photos.app.goo.gl/r8wFwi38RBM7Q6KZA",
-      "notes": "Dune hike trailhead near Snail Road off Route 6.",
       "activities": [
         {
           "title": "Sand dune hike",
@@ -180,7 +175,6 @@
       "lng": -70.3822,
       "photoAlbum": "https://photos.google.com/album/AF1QipNYthsKYF3K6b4Lv_rm56ASEnwNUVH2Sjz_vPxC",
       "coverPhotoLink": "https://photos.google.com/share/AF1QipMZhmkR9vf-u84rcN4GE_UlS8CYQD8hT386WvvALm04HFL-rarKIJcg19n3rS8oMA?key=dUpqNk1zN1d2QlplV2lLWkZ6R3A2RDJZZ3dCZ1ln",
-      "notes": "Leashed dogs allowed on ORV beach/trails year-round; leashed dogs NOT allowed on the main bathing beach mid-May-mid-Sept. Full album requires an invite from the owner - the cover photo is separately public.",
       "activities": [
         {
           "title": "Fire on the beach at night",
@@ -278,7 +272,6 @@
       "lat": 41.7726,
       "lng": -69.9462,
       "website": "https://www.mass.gov/locations/nickerson-state-park",
-      "notes": "3488 Main St (Route 6A). Leashed dogs allowed in the park; not allowed on park beaches (except Flax Pond off-season) or in bathhouses.",
       "activities": []
     },
     {
@@ -289,7 +282,6 @@
       "lat": 41.682,
       "lng": -69.9599,
       "website": "https://www.thesquire.com/",
-      "notes": "487 Main St.",
       "activities": [
         {
           "title": "Dinner and drinks",
@@ -305,7 +297,6 @@
       "lat": 41.7602,
       "lng": -70.0778,
       "website": "https://www.brewsterstore.com/",
-      "notes": "1935 Main St (Route 6A at Route 124). Brewster Scoop is the ice cream parlor next to the store (summer only).",
       "activities": [
         {
           "title": "Browse the general store",
@@ -339,7 +330,6 @@
       "lat": 41.782923,
       "lng": -70.000875,
       "website": "https://hogislandbeerco.com/",
-      "notes": "28 West Rd.",
       "activities": [
         {
           "title": "Brewery",
@@ -373,7 +363,6 @@
       "lat": 41.6714,
       "lng": -69.9516,
       "coordsVerified": false,
-      "notes": "54 Barcliff Ave Ext, at Aunt Lydia's Cove. Boats return ~noon-2pm depending on tide. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
       "activities": [
         {
           "title": "View fishing boats returning",
@@ -389,10 +378,14 @@
       "lat": 41.66,
       "lng": -70.20185,
       "website": "https://ryanfamily.com/locations/south-yarmouth/",
-      "notes": "1067 Route 28. Bowling, arcade (50+ games), VR coaster, axe-throwing.",
+      "photoAlbum": "https://photos.google.com/album/AF1QipNKHvij_x7G6bAxUlmGkRNaRU2RHy348JnFK1eG",
       "activities": [
         {
           "title": "Arcade",
+          "category": "entertainment"
+        },
+        {
+          "title": "Bowling",
           "category": "entertainment"
         }
       ]
@@ -405,7 +398,6 @@
       "lat": 41.6510561,
       "lng": -70.2357716,
       "website": "https://www.wickedwavescapecod.com/",
-      "notes": "518 Main St (Route 28).",
       "activities": [
         {
           "title": "Water park",
@@ -420,7 +412,6 @@
       "area": "Eastham",
       "lat": 41.86014,
       "lng": -69.95297,
-      "notes": "120 Nauset Light Beach Rd.",
       "activities": [
         {
           "title": "Beach hike",
@@ -436,7 +427,6 @@
       "lat": 42.0044,
       "lng": -70.0537,
       "website": "https://trurovineyardsofcapecod.com/",
-      "notes": "11 Shore Rd (Route 6A).",
       "activities": [
         {
           "title": "Wine tasting",
@@ -470,7 +460,6 @@
       "lat": 42.043,
       "lng": -70.1935,
       "coordsVerified": false,
-      "notes": "West End, far end of Commercial St. ~2km rock jetty/dike walk to Long Point; only cross near low tide, sturdy shoes recommended. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
       "activities": [
         {
           "title": "Jetty walk to Long Point",
@@ -486,7 +475,6 @@
       "lat": 41.701,
       "lng": -70.1875,
       "coordsVerified": false,
-      "notes": "300-308 N Dennis Rd. Northern end of Bass River; dip-net/bucket crabbing, no permit needed. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
       "activities": [
         {
           "title": "Crabbing",
@@ -502,7 +490,6 @@
       "lat": 41.652,
       "lng": -70.16,
       "coordsVerified": false,
-      "notes": "220 South St, at the mouth of Bass River. Boat ramp, fishing deck. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
       "activities": [
         {
           "title": "Crabbing",
@@ -522,7 +509,6 @@
       "lat": 41.667483,
       "lng": -70.145931,
       "website": "https://www.capecodwaterways.com/",
-      "notes": "16 Route 28. Kayak, canoe, SUP, and pedal boat rentals on Swan Pond River out to the ocean.",
       "activities": [
         {
           "title": "Kayaking",

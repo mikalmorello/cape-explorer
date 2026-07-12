@@ -61,11 +61,14 @@ Rules of thumb:
 - A location with no activities yet is fine — it's just a saved place.
 - Coordinates should be verified (not guessed) so pins land on the
   actual spot when zoomed in. When a precise geocode can't be found,
-  use a best estimate, set `"coordsVerified": false`, and say so in
-  `notes` — don't present a guess as verified.
+  use a best estimate and set `"coordsVerified": false` — don't
+  present a guess as verified.
 - `dogFriendly` is opt-in: only set it when a place's actual policy has
-  been checked, and note any leash/seasonal conditions in `notes`.
-  Leave it unset rather than guess.
+  been checked. Leave it unset rather than guess.
+- **No auto-generated `notes`.** Don't add descriptive text (addresses,
+  hours, caveats) on your own initiative — locations carry only what
+  the user explicitly dictates. If they give you specific text for
+  `notes`, use it verbatim; otherwise leave the field out entirely.
 - `photoAlbum` is the "view full album" link shown in the UI. For a
   fully public album, use the `photos.app.goo.gl` shareable link — the
   harvester also uses it to grab the cover, and linking one makes it
