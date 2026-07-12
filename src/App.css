@@ -114,6 +114,24 @@
   padding: 14px 18px;
 }
 
+.card-row {
+  display: flex;
+  gap: 14px;
+}
+
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-thumb {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
 .location-card header {
   display: flex;
   align-items: baseline;
