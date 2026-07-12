@@ -22,8 +22,9 @@ activity SHALL have `title` and MAY have `category` and `notes`.
 
 ### Requirement: Data can be viewed as a list
 The app SHALL provide a list view, toggleable with the map view, that
-shows every location with its area, website, notes, and activities
-(title and category).
+shows every location with its area, website, notes, activities (title
+and category), and — when a cover photo has been harvested for that
+location — a thumbnail of it.
 
 #### Scenario: Switching to list view
 - **WHEN** the user switches the view toggle to "List"
@@ -33,6 +34,15 @@ shows every location with its area, website, notes, and activities
 #### Scenario: Switching back to map
 - **WHEN** the user switches the toggle back to "Map"
 - **THEN** the map with all pins is shown again
+
+#### Scenario: Location with a cover photo
+- **WHEN** a location has a harvested cover photo
+- **THEN** its list card shows a thumbnail of that cover
+
+#### Scenario: Location without a cover photo
+- **WHEN** a location has no cover photo
+- **THEN** its list card renders without a thumbnail, unchanged
+  otherwise
 
 ### Requirement: Locations have a primary type
 Each location SHALL have a `type` field (a lowercase string, e.g.
