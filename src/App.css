@@ -5,6 +5,9 @@
 }
 
 .app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 12px 20px;
   border-bottom: 1px solid var(--border);
 }
@@ -14,9 +17,34 @@
   margin: 0;
 }
 
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.view-toggle button {
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 14px;
+  cursor: pointer;
+}
+
+.view-toggle button.active {
+  color: var(--text-h);
+  background: var(--border);
+}
+
 .app-main {
   flex: 1;
   min-height: 0;
+  overflow-y: auto;
 }
 
 .map-view {
@@ -31,4 +59,95 @@
   justify-content: center;
   padding: 24px;
   text-align: center;
+}
+
+.location-popup {
+  color: #333;
+  max-width: 240px;
+}
+
+.location-popup h2 {
+  font-size: 15px;
+  margin: 0 0 2px;
+  color: #111;
+}
+
+.popup-area {
+  font-size: 12px;
+  color: #777;
+  margin: 0 0 6px;
+}
+
+.popup-activities {
+  margin: 6px 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.popup-notes {
+  font-size: 12px;
+  color: #555;
+  margin: 6px 0;
+}
+
+.category-tag {
+  font-size: 11px;
+  background: #eef;
+  color: #446;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.location-list {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  gap: 14px;
+}
+
+.location-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+
+.location-card header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.location-card h2 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.card-area {
+  font-size: 13px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.card-activities {
+  margin: 8px 0;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.card-activities .category-tag {
+  background: var(--border);
+  color: var(--text-h);
+}
+
+.card-notes {
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.location-card a {
+  font-size: 13px;
 }

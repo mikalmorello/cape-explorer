@@ -26,8 +26,10 @@ locations anchor pins; activities belong to locations.
   towns: "Downtown Provincetown" and "Provincetown Dunes" are separate
   locations; the optional `area` field carries the town name for
   future area filtering.
-- **`status` lives on the activity, not the location** — you may have
-  done one thing at a place and want to do another there.
+- **No done/want-to-do status field.** The owner clarified the data is
+  a record of things they did/do, not a wishlist. If a wishlist notion
+  returns later, it comes back as a field on the activity in its own
+  change.
 - **Coordinates verified during implementation** (web search per
   place) rather than guessed; each seeded location should land on the
   actual spot when the map is zoomed in.

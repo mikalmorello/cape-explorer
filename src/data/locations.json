@@ -1,0 +1,128 @@
+{
+  "locations": [
+    {
+      "id": "marconi-beach",
+      "name": "Marconi Beach",
+      "area": "Wellfleet",
+      "lat": 41.8927,
+      "lng": -69.9612,
+      "activities": [
+        {
+          "title": "Surfing",
+          "category": "beach"
+        }
+      ]
+    },
+    {
+      "id": "captain-baker-donuts",
+      "name": "Captain Baker Donut Shop",
+      "area": "West Dennis",
+      "lat": 41.6605,
+      "lng": -70.1655,
+      "website": "https://captainbakerdonuts.com/",
+      "notes": "485 Main St (Route 28). Open 7am-noon.",
+      "activities": [
+        {
+          "title": "Breakfast",
+          "category": "food"
+        }
+      ]
+    },
+    {
+      "id": "pirate-adventures",
+      "name": "Cape Cod Pirate Adventures",
+      "area": "Hyannis",
+      "lat": 41.6488,
+      "lng": -70.279,
+      "website": "https://capecodpirateadventures.com/",
+      "notes": "180 Ocean St, Hyannis Harbor.",
+      "activities": [
+        {
+          "title": "Interactive pirate cruise for children",
+          "category": "cruise"
+        }
+      ]
+    },
+    {
+      "id": "wellfleet-drive-in",
+      "name": "Wellfleet Drive-In",
+      "area": "Wellfleet",
+      "lat": 41.87747,
+      "lng": -69.99191,
+      "website": "https://www.wellfleetcinemas.com/",
+      "activities": [
+        {
+          "title": "Drive-in movie",
+          "category": "entertainment"
+        }
+      ]
+    },
+    {
+      "id": "downtown-provincetown",
+      "name": "Downtown Provincetown",
+      "area": "Provincetown",
+      "lat": 42.0526,
+      "lng": -70.1815,
+      "activities": [
+        {
+          "title": "Drinks",
+          "category": "drinks"
+        },
+        {
+          "title": "Shopping",
+          "category": "shopping"
+        }
+      ]
+    },
+    {
+      "id": "provincetown-dunes",
+      "name": "Provincetown Dunes",
+      "area": "Provincetown",
+      "lat": 42.057,
+      "lng": -70.161,
+      "notes": "Dune hike trailhead near Snail Road off Route 6.",
+      "activities": [
+        {
+          "title": "Sand dune hike",
+          "category": "hike"
+        }
+      ]
+    },
+    {
+      "id": "lighthouse-beach",
+      "name": "Lighthouse Beach",
+      "area": "Chatham",
+      "lat": 41.6705,
+      "lng": -69.945,
+      "activities": []
+    },
+    {
+      "id": "sandy-neck-beach",
+      "name": "Sandy Neck Beach",
+      "area": "West Barnstable",
+      "lat": 41.7387,
+      "lng": -70.3822,
+      "activities": [
+        {
+          "title": "Fire on the beach at night",
+          "category": "beach"
+        }
+      ]
+    },
+    {
+      "id": "truro-vineyards",
+      "name": "Truro Vineyards",
+      "area": "North Truro",
+      "lat": 42.0044,
+      "lng": -70.0537,
+      "website": "https://trurovineyardsofcapecod.com/",
+      "notes": "11 Shore Rd (Route 6A).",
+      "activities": [
+        {
+          "title": "Wine tasting",
+          "category": "winery"
+        }
+      ]
+    }
+  ]
+}

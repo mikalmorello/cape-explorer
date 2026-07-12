@@ -18,14 +18,14 @@ marker.
 
 ### Requirement: Pin click shows location details
 Clicking a marker SHALL open an info popup for that location showing
-its name, its activities (title and status), and — when present — its
-area, website link, and notes.
+its name, its activities (title and category), and — when present —
+its area, website link, and notes.
 
 #### Scenario: Location with activities and website
 - **WHEN** the user clicks the marker of a location that has
   activities and a website
-- **THEN** the popup shows the location name, each activity with its
-  status, and a clickable website link
+- **THEN** the popup shows the location name, each activity, and a
+  clickable website link
 
 #### Scenario: Location with no activities
 - **WHEN** the user clicks the marker of a location with no activities

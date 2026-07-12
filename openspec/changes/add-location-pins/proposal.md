@@ -11,19 +11,27 @@ Viewing modes (list) and filtering come in later changes.
   - **Location** (gets a pin): `id`, `name`, `lat`, `lng`, optional
     `area` (town, e.g. "Provincetown"), optional `website`, optional
     `notes`, `activities[]`. A location can have zero activities.
-  - **Activity** (nested in its location): `title`, `category`,
-    `status` (`done` / `want-to-do`), optional `notes`.
+  - **Activity** (nested in its location): `title`, optional
+    `category`, optional `notes`. (No done/want-to-do status — the
+    data records the things we did/do, per the owner.)
 - Seed the file with the owner's real starter list (Marconi Beach,
   Captain Baker Donuts, Wellfleet Drive-In, Downtown Provincetown,
   Provincetown Dunes, Lighthouse Beach, Sandy Neck Beach, Truro
   Vineyards, Cape Cod Pirate Adventures), with verified coordinates.
 - Replace the dummy pin: render one pin per location from the data.
 - Clicking a pin opens an info popup: location name, area, its
-  activities (title + status), website link if present, notes.
+  activities (title + category), website link if present, notes.
 - Remove the dummy-pin code.
+- Add a **Data view**: a Map/List toggle in the header; the List view
+  shows every location with its details and activities straight from
+  the JSON, so the data itself is easy to review.
+- Add a repo Claude skill (`.claude/skills/add-location/`) that keeps
+  adding/editing locations structured: it documents the schema and the
+  steps (verify coordinates via web search, slug IDs, validate, commit)
+  so future "add X" requests follow the same format.
 
-Out of scope (future changes): list view, filters, add/edit UI, photos,
-Supabase.
+Out of scope (future changes): filtering, add/edit UI in the app
+itself, photos, Supabase.
 
 ## Capabilities
 
