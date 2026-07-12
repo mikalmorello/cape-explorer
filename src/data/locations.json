@@ -1,6 +1,25 @@
 {
   "locations": [
     {
+      "id": "wilbur-park",
+      "name": "Wilbur Park",
+      "type": "park",
+      "dogFriendly": true,
+      "area": "Chatham",
+      "lat": 41.6848966,
+      "lng": -70.1606171,
+      "activities": [
+        {
+          "title": "Picnic",
+          "category": "sightseeing"
+        },
+        {
+          "title": "Boat ramp",
+          "category": "watersports"
+        }
+      ]
+    },
+    {
       "id": "cuffys-of-cape-cod",
       "name": "Cuffy's of Cape Cod",
       "type": "shopping",
