@@ -110,6 +110,21 @@
       ]
     },
     {
+      "id": "pirates-cove-mini-golf",
+      "name": "Pirate's Cove Adventure Golf",
+      "area": "South Yarmouth",
+      "lat": 41.669,
+      "lng": -70.1993,
+      "website": "https://www.piratescove.net/locations/massachusetts/south-yarmouth/",
+      "notes": "728 Main St (Route 28).",
+      "activities": [
+        {
+          "title": "Mini golf",
+          "category": "entertainment"
+        }
+      ]
+    },
+    {
       "id": "truro-vineyards",
       "name": "Truro Vineyards",
       "area": "North Truro",
