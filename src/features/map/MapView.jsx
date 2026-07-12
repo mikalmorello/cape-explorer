@@ -4,6 +4,13 @@ import data from '../../data/locations.json'
 
 const CAPE_COD_CENTER = { lat: 41.7003, lng: -70.3002 }
 
+// Keep the map focused on our own pins - hide Google's default
+// points-of-interest and transit layers so they don't compete visually.
+const MAP_STYLES = [
+  { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+  { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+]
+
 function MissingApiKeyNotice() {
   return (
     <div className="map-notice">
@@ -61,6 +68,7 @@ export function MapView() {
         defaultZoom={10}
         gestureHandling="greedy"
         disableDefaultUI={false}
+        styles={MAP_STYLES}
         onClick={() => setSelectedId(null)}
       >
         {data.locations.map((location) => (

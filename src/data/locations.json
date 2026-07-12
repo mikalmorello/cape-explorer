@@ -3,6 +3,7 @@
     {
       "id": "marconi-beach",
       "name": "Marconi Beach",
+      "type": "beach",
       "area": "Wellfleet",
       "lat": 41.8927,
       "lng": -69.9612,
@@ -16,6 +17,7 @@
     {
       "id": "captain-baker-donuts",
       "name": "Captain Baker Donut Shop",
+      "type": "food",
       "area": "West Dennis",
       "lat": 41.6605,
       "lng": -70.1655,
@@ -31,6 +33,7 @@
     {
       "id": "pirate-adventures",
       "name": "Cape Cod Pirate Adventures",
+      "type": "attraction",
       "area": "Hyannis",
       "lat": 41.6488,
       "lng": -70.279,
@@ -46,6 +49,7 @@
     {
       "id": "wellfleet-drive-in",
       "name": "Wellfleet Drive-In",
+      "type": "entertainment",
       "area": "Wellfleet",
       "lat": 41.87747,
       "lng": -69.99191,
@@ -60,6 +64,7 @@
     {
       "id": "downtown-provincetown",
       "name": "Downtown Provincetown",
+      "type": "shopping",
       "area": "Provincetown",
       "lat": 42.0526,
       "lng": -70.1815,
@@ -77,6 +82,7 @@
     {
       "id": "provincetown-dunes",
       "name": "Provincetown Dunes",
+      "type": "hike",
       "area": "Provincetown",
       "lat": 42.057,
       "lng": -70.161,
@@ -91,6 +97,7 @@
     {
       "id": "lighthouse-beach",
       "name": "Lighthouse Beach",
+      "type": "beach",
       "area": "Chatham",
       "lat": 41.6705,
       "lng": -69.945,
@@ -99,9 +106,12 @@
     {
       "id": "sandy-neck-beach",
       "name": "Sandy Neck Beach",
+      "type": "beach",
+      "dogFriendly": true,
       "area": "West Barnstable",
       "lat": 41.7387,
       "lng": -70.3822,
+      "notes": "Leashed dogs allowed on ORV beach/trails year-round; leashed dogs NOT allowed on the main bathing beach mid-May-mid-Sept.",
       "activities": [
         {
           "title": "Fire on the beach at night",
@@ -112,6 +122,7 @@
     {
       "id": "pirates-cove-mini-golf",
       "name": "Pirate's Cove Adventure Golf",
+      "type": "entertainment",
       "area": "South Yarmouth",
       "lat": 41.669,
       "lng": -70.1993,
@@ -127,6 +138,7 @@
     {
       "id": "cape-cod-creamery",
       "name": "Cape Cod Creamery",
+      "type": "food",
       "area": "South Yarmouth",
       "lat": 41.6672,
       "lng": -70.1935,
@@ -142,6 +154,7 @@
     {
       "id": "lewis-bay",
       "name": "Lewis Bay",
+      "type": "fishing",
       "area": "Hyannis",
       "lat": 41.636,
       "lng": -70.2635,
@@ -155,16 +168,19 @@
     {
       "id": "nickerson-state-park",
       "name": "Nickerson State Park",
+      "type": "park",
+      "dogFriendly": true,
       "area": "Brewster",
       "lat": 41.7726,
       "lng": -69.9462,
       "website": "https://www.mass.gov/locations/nickerson-state-park",
-      "notes": "3488 Main St (Route 6A).",
+      "notes": "3488 Main St (Route 6A). Leashed dogs allowed in the park; not allowed on park beaches (except Flax Pond off-season) or in bathhouses.",
       "activities": []
     },
     {
       "id": "chatham-squire",
       "name": "The Chatham Squire",
+      "type": "food",
       "area": "Chatham",
       "lat": 41.682,
       "lng": -69.9599,
@@ -180,6 +196,7 @@
     {
       "id": "brewster-store",
       "name": "The Brewster Store",
+      "type": "shopping",
       "area": "Brewster",
       "lat": 41.7602,
       "lng": -70.0778,
@@ -199,6 +216,7 @@
     {
       "id": "breakwater-beach",
       "name": "Breakwater Beach",
+      "type": "beach",
       "area": "Brewster",
       "lat": 41.7649,
       "lng": -70.079,
@@ -212,6 +230,7 @@
     {
       "id": "hog-island-beer-co",
       "name": "Hog Island Beer Co.",
+      "type": "brewery",
       "area": "Orleans",
       "lat": 41.782923,
       "lng": -70.000875,
@@ -227,6 +246,7 @@
     {
       "id": "devils-purse-brewing",
       "name": "Devil's Purse Brewing Company",
+      "type": "brewery",
       "area": "South Dennis",
       "lat": 41.716,
       "lng": -70.187,
@@ -243,6 +263,7 @@
     {
       "id": "chatham-fish-pier",
       "name": "Chatham Fish Pier",
+      "type": "attraction",
       "area": "Chatham",
       "lat": 41.6714,
       "lng": -69.9516,
@@ -258,6 +279,7 @@
     {
       "id": "ryan-family-amusements",
       "name": "Ryan Family Amusements",
+      "type": "entertainment",
       "area": "South Yarmouth",
       "lat": 41.66,
       "lng": -70.20185,
@@ -273,6 +295,7 @@
     {
       "id": "wicked-waves",
       "name": "Wicked Waves Cape Cod",
+      "type": "entertainment",
       "area": "West Yarmouth",
       "lat": 41.6510561,
       "lng": -70.2357716,
@@ -288,6 +311,7 @@
     {
       "id": "nauset-light-beach",
       "name": "Nauset Light Beach",
+      "type": "beach",
       "area": "Eastham",
       "lat": 41.86014,
       "lng": -69.95297,
@@ -302,6 +326,7 @@
     {
       "id": "truro-vineyards",
       "name": "Truro Vineyards",
+      "type": "winery",
       "area": "North Truro",
       "lat": 42.0044,
       "lng": -70.0537,
@@ -311,6 +336,91 @@
         {
           "title": "Wine tasting",
           "category": "winery"
+        }
+      ]
+    },
+    {
+      "id": "pancake-man",
+      "name": "The Pancake Man",
+      "type": "food",
+      "area": "South Yarmouth",
+      "lat": 41.6625,
+      "lng": -70.2115,
+      "coordsVerified": false,
+      "website": "https://www.pancakeman.com/",
+      "notes": "952 Route 28, at Long Pond Dr. Open 7am-2pm. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "Breakfast",
+          "category": "food"
+        }
+      ]
+    },
+    {
+      "id": "provincetown-breakwater",
+      "name": "Provincetown Breakwater (Long Point Dike)",
+      "type": "hike",
+      "area": "Provincetown",
+      "lat": 42.043,
+      "lng": -70.1935,
+      "coordsVerified": false,
+      "notes": "West End, far end of Commercial St. ~2km rock jetty/dike walk to Long Point; only cross near low tide, sturdy shoes recommended. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "Jetty walk to Long Point",
+          "category": "hike"
+        }
+      ]
+    },
+    {
+      "id": "crab-creek",
+      "name": "Crab Creek Conservation Area",
+      "type": "fishing",
+      "area": "Yarmouth Port",
+      "lat": 41.701,
+      "lng": -70.1875,
+      "coordsVerified": false,
+      "notes": "300-308 N Dennis Rd. Northern end of Bass River; dip-net/bucket crabbing, no permit needed. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "Crabbing",
+          "category": "fishing"
+        }
+      ]
+    },
+    {
+      "id": "smugglers-beach",
+      "name": "Smugglers Beach (Bass River Beach)",
+      "type": "beach",
+      "area": "South Yarmouth",
+      "lat": 41.652,
+      "lng": -70.16,
+      "coordsVerified": false,
+      "notes": "220 South St, at the mouth of Bass River. Boat ramp, fishing deck. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "Crabbing",
+          "category": "fishing"
+        },
+        {
+          "title": "Beach",
+          "category": "beach"
+        }
+      ]
+    },
+    {
+      "id": "cape-cod-waterways",
+      "name": "Cape Cod Waterways",
+      "type": "attraction",
+      "area": "Dennis Port",
+      "lat": 41.667483,
+      "lng": -70.145931,
+      "website": "https://www.capecodwaterways.com/",
+      "notes": "16 Route 28. Kayak, canoe, SUP, and pedal boat rentals on Swan Pond River out to the ocean.",
+      "activities": [
+        {
+          "title": "Kayaking",
+          "category": "watersports"
         }
       ]
     }

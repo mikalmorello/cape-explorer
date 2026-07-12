@@ -26,9 +26,12 @@ as cards.
     {
       "id": "sandy-neck-beach",          // required — kebab-case slug, unique
       "name": "Sandy Neck Beach",        // required — display name
+      "type": "beach",                   // required — primary category (see below)
+      "dogFriendly": true,               // optional — only set when verified, never guessed
       "lat": 41.7387,                    // required — pin latitude
       "lng": -70.3822,                   // required — pin longitude
       "area": "West Barnstable",         // optional — town/area, for future filtering
+      "coordsVerified": false,           // optional — present + false when coords are an estimate
       "website": "https://…",            // optional
       "notes": "Entrance off Route 6A.", // optional
       "activities": [                    // optional — can be empty: a saved place
@@ -43,6 +46,11 @@ as cards.
 }
 ```
 
+`type` values in use so far: `beach`, `food`, `brewery`, `winery`,
+`hike`, `entertainment`, `shopping`, `attraction`, `park`, `fishing`,
+`watersports`. Reuse one of these before inventing a new one — it's
+what future map icons and filters will key off of.
+
 Rules of thumb:
 
 - A **location** is a specific spot, not a town — "Downtown
@@ -50,7 +58,12 @@ Rules of thumb:
   share `area: "Provincetown"`.
 - A location with no activities yet is fine — it's just a saved place.
 - Coordinates should be verified (not guessed) so pins land on the
-  actual spot when zoomed in.
+  actual spot when zoomed in. When a precise geocode can't be found,
+  use a best estimate, set `"coordsVerified": false`, and say so in
+  `notes` — don't present a guess as verified.
+- `dogFriendly` is opt-in: only set it when a place's actual policy has
+  been checked, and note any leash/seasonal conditions in `notes`.
+  Leave it unset rather than guess.
 
 To add or edit entries, use the `add-location` Claude skill
 (`.claude/skills/add-location/`) — or edit the JSON directly following
