@@ -210,6 +210,96 @@
       ]
     },
     {
+      "id": "hog-island-beer-co",
+      "name": "Hog Island Beer Co.",
+      "area": "Orleans",
+      "lat": 41.782923,
+      "lng": -70.000875,
+      "website": "https://hogislandbeerco.com/",
+      "notes": "28 West Rd.",
+      "activities": [
+        {
+          "title": "Brewery",
+          "category": "brewery"
+        }
+      ]
+    },
+    {
+      "id": "devils-purse-brewing",
+      "name": "Devil's Purse Brewing Company",
+      "area": "South Dennis",
+      "lat": 41.716,
+      "lng": -70.187,
+      "coordsVerified": false,
+      "website": "https://www.devilspurse.com/",
+      "notes": "120 Great Western Rd. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "Brewery",
+          "category": "brewery"
+        }
+      ]
+    },
+    {
+      "id": "chatham-fish-pier",
+      "name": "Chatham Fish Pier",
+      "area": "Chatham",
+      "lat": 41.6714,
+      "lng": -69.9516,
+      "coordsVerified": false,
+      "notes": "54 Barcliff Ave Ext, at Aunt Lydia's Cove. Boats return ~noon-2pm depending on tide. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "View fishing boats returning",
+          "category": "sightseeing"
+        }
+      ]
+    },
+    {
+      "id": "ryan-family-amusements",
+      "name": "Ryan Family Amusements",
+      "area": "South Yarmouth",
+      "lat": 41.66,
+      "lng": -70.20185,
+      "website": "https://ryanfamily.com/locations/south-yarmouth/",
+      "notes": "1067 Route 28. Bowling, arcade (50+ games), VR coaster, axe-throwing.",
+      "activities": [
+        {
+          "title": "Arcade",
+          "category": "entertainment"
+        }
+      ]
+    },
+    {
+      "id": "wicked-waves",
+      "name": "Wicked Waves Cape Cod",
+      "area": "West Yarmouth",
+      "lat": 41.6510561,
+      "lng": -70.2357716,
+      "website": "https://www.wickedwavescapecod.com/",
+      "notes": "518 Main St (Route 28).",
+      "activities": [
+        {
+          "title": "Water park",
+          "category": "entertainment"
+        }
+      ]
+    },
+    {
+      "id": "nauset-light-beach",
+      "name": "Nauset Light Beach",
+      "area": "Eastham",
+      "lat": 41.86014,
+      "lng": -69.95297,
+      "notes": "120 Nauset Light Beach Rd.",
+      "activities": [
+        {
+          "title": "Beach hike",
+          "category": "hike"
+        }
+      ]
+    },
+    {
       "id": "truro-vineyards",
       "name": "Truro Vineyards",
       "area": "North Truro",
