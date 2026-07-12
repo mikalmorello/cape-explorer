@@ -22,9 +22,9 @@
 
 ## 4. Deploy to GitHub Pages
 
-- [ ] 4.1 Set `base: '/cape-explorer/'` in `vite.config.js` for the
+- [x] 4.1 Set `base: '/cape-explorer/'` in `vite.config.js` for the
       project-pages URL
-- [ ] 4.2 Add `.github/workflows/deploy.yml` that builds on push to
+- [x] 4.2 Add `.github/workflows/deploy.yml` that builds on push to
       `main` and deploys via `actions/configure-pages` +
       `actions/upload-pages-artifact` + `actions/deploy-pages`, passing
       `VITE_GOOGLE_MAPS_API_KEY` from a `GOOGLE_MAPS_API_KEY` repo secret
