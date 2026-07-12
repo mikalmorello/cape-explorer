@@ -1,8 +1,9 @@
 import data from '../../data/locations.json'
 import covers from '../../data/photos.json'
+import { sizedPhotoUrl } from '../../lib/googlePhotos'
 
 function thumbUrl(url) {
-  return `${url}=w200-h200-c`
+  return sizedPhotoUrl(url, 'w200-h200-c')
 }
 
 export function LocationList() {

@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import data from '../../data/locations.json'
 import covers from '../../data/photos.json'
+import { sizedPhotoUrl } from '../../lib/googlePhotos'
 
 function locationById(id) {
   return data.locations.find((loc) => loc.id === id)
 }
 
 function thumbUrl(url) {
-  return `${url}=w400-h400-c`
+  return sizedPhotoUrl(url, 'w400-h400-c')
 }
 
 function coverUrl(url) {
-  return `${url}=w1200`
+  return sizedPhotoUrl(url, 'w1200')
 }
 
 function LocationDetail({ location, cover, onClose }) {
