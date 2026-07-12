@@ -27,12 +27,25 @@ The file has a single `locations` array. Fields:
   couldn't be found and `lat`/`lng` are an address-based estimate.
   Mention it in `notes` too.
 - `website` (optional)
-- `photoAlbum` (optional): a Google Photos **shared** album URL
-  (`https://photos.app.goo.gl/...`). One cover image per album is
-  harvested at deploy time into `src/data/photos.json`; the full album
-  opens via the link. Remind the user that linked albums become
-  effectively public and that cover changes appear after the next
-  deploy.
+- `photoAlbum` (optional): the "view full album" link. Public case: a
+  `photos.app.goo.gl` shareable link (also used as the cover source).
+  Gated case: a `photos.google.com/album/...` URL that requires the
+  viewer to be invited — pair it with `coverPhotoLink` below so a
+  cover still shows for everyone. Remind the user that a public
+  `photoAlbum` is effectively public via the site.
+- `coverPhotoLink` (optional): a Google Photos **single-photo** share
+  link (`https://photos.google.com/share/...?key=...`), used only when
+  `photoAlbum` is gated. Sharing one photo on its own creates its own
+  independent public mini-album in Google Photos, separate from the
+  main album's sharing state — that's what makes a public cover
+  possible alongside a gated gallery. **Warn the user explicitly**:
+  turning off an album's link sharing kills that link for everyone,
+  including people they've invited individually (invited people see it
+  in their own Google Photos account instead) — don't assume the old
+  link still works for anyone once link sharing is off.
+- Cover harvesting at deploy time into `src/data/photos.json` prefers
+  `coverPhotoLink`, falling back to `photoAlbum`; cover changes appear
+  after the next deploy.
 - `notes` (optional): address, hours, tips
 - `activities` (optional array): may be empty — a location can be just
   a saved place

@@ -33,7 +33,8 @@ as cards.
       "area": "West Barnstable",         // optional — town/area, for future filtering
       "coordsVerified": false,           // optional — present + false when coords are an estimate
       "website": "https://…",            // optional
-      "photoAlbum": "https://photos.app.goo.gl/…", // optional — Google Photos SHARED album link
+      "photoAlbum": "https://photos.app.goo.gl/…", // optional — link to the full album (public or gated)
+      "coverPhotoLink": "https://photos.google.com/share/…?key=…", // optional — public single-photo link for the cover, when photoAlbum is gated
       "notes": "Entrance off Route 6A.", // optional
       "activities": [                    // optional — can be empty: a saved place
         {
@@ -65,13 +66,25 @@ Rules of thumb:
 - `dogFriendly` is opt-in: only set it when a place's actual policy has
   been checked, and note any leash/seasonal conditions in `notes`.
   Leave it unset rather than guess.
-- `photoAlbum` must be a Google Photos **shared** album link ("anyone
-  with the link"). At deploy time `scripts/fetch-photos.mjs` harvests
-  one **cover image** per album into `src/data/photos.json` for the
-  Photos view; the full album opens via the link itself. Covers
-  refresh on each deploy, so after changing an album, re-run the
-  deploy workflow (or push any commit). Linked albums become
+- `photoAlbum` is the "view full album" link shown in the UI. For a
+  fully public album, use the `photos.app.goo.gl` shareable link — the
+  harvester also uses it to grab the cover, and linking one makes it
   effectively public via the site.
+- To gate the full album to people you invite while still showing a
+  cover to everyone, use a `photos.google.com/album/...` URL (visitors
+  without access get Google's own sign-in/request-access screen) for
+  `photoAlbum`, and separately share **one photo** on its own (Google
+  Photos treats a single-item share as its own independent public
+  mini-album) for `coverPhotoLink` — that's what the harvester fetches
+  the cover from. **Turning off an album's own link sharing kills that
+  exact link for everyone, including invited people** — invited people
+  view it through their own Google Photos account instead, so don't
+  expect the old link to keep working for them.
+- At deploy time `scripts/fetch-photos.mjs` harvests one **cover
+  image** (preferring `coverPhotoLink`, falling back to `photoAlbum`)
+  into `src/data/photos.json` for the Photos view. Covers refresh on
+  each deploy, so after changing a link, re-run the deploy workflow
+  (or push any commit).
 
 To add or edit entries, use the `add-location` Claude skill
 (`.claude/skills/add-location/`) — or edit the JSON directly following
