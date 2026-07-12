@@ -20,18 +20,18 @@ the build. Photo data refreshes only when a deploy runs.
 
 ### Requirement: Photo grid view with location drill-down
 The app SHALL provide a Photos view, toggleable alongside Map and
-List, showing a grid of photos from all linked albums. Each photo
-SHALL identify its location, and selecting a photo SHALL show that
-location's details (name, area, activities, notes, website) together
-with its full gallery.
+List, showing a grid with exactly one cover photo per linked album
+(its first harvested photo), labeled with the location name. Selecting
+a cover SHALL show that location's details (name, area, activities,
+notes, website) together with its full gallery.
 
 #### Scenario: Browsing the grid
 - **WHEN** the user opens the Photos view and albums have been linked
-- **THEN** a grid of photo thumbnails is shown, each attributable to
+- **THEN** the grid shows one cover tile per album, each labeled with
   its location
 
 #### Scenario: Drilling into a location
-- **WHEN** the user clicks a photo in the grid
+- **WHEN** the user clicks an album cover in the grid
 - **THEN** the location's details and its full photo gallery are shown
 
 #### Scenario: No albums linked

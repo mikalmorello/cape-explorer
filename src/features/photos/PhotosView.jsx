@@ -2,8 +2,6 @@ import { useState } from 'react'
 import data from '../../data/locations.json'
 import photos from '../../data/photos.json'
 
-const GRID_PHOTOS_PER_LOCATION = 6
-
 function locationById(id) {
   return data.locations.find((loc) => loc.id === id)
 }
@@ -86,19 +84,17 @@ export function PhotosView() {
 
   return (
     <div className="photo-grid photo-grid-browse">
-      {entries.flatMap(([id, urls]) =>
-        urls.slice(0, GRID_PHOTOS_PER_LOCATION).map((url) => (
-          <button
-            key={url}
-            type="button"
-            className="photo-tile"
-            onClick={() => setSelectedId(id)}
-          >
-            <img src={thumbUrl(url)} alt={locationById(id).name} loading="lazy" />
-            <span className="photo-tile-label">{locationById(id).name}</span>
-          </button>
-        )),
-      )}
+      {entries.map(([id, urls]) => (
+        <button
+          key={id}
+          type="button"
+          className="photo-tile"
+          onClick={() => setSelectedId(id)}
+        >
+          <img src={thumbUrl(urls[0])} alt={locationById(id).name} loading="lazy" />
+          <span className="photo-tile-label">{locationById(id).name}</span>
+        </button>
+      ))}
     </div>
   )
 }
