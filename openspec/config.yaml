@@ -1,0 +1,52 @@
+schema: spec-driven
+
+context: |
+  ## What this is
+  Cape Explorer: a web app for mapping and documenting Cape Cod activities
+  (things done and things wanted to do), for personal use and for sharing
+  with others. Map-first browsing with a filterable list view alongside it.
+  This is a 2-person personal project, not a commercial product.
+
+  ## Stack (decided)
+  - Frontend: React + Vite, TypeScript
+  - Map: Google Maps JS API (via @vis.gl/react-google-maps)
+  - Backend/DB/Auth/Storage: Supabase (Postgres) - not yet wired up
+  - Styling: not yet decided (likely Tailwind CSS, not yet added)
+  - Hosting: not yet decided/set up - do not add deploy config or discuss
+    hosting providers until explicitly asked
+  - Repo: https://github.com/mikalmorello/cape-explorer
+
+  ## Core data model (planned)
+  activities: id, user_id, title, category, status (done/want-to-do), lat,
+  lng, address, date_visited, notes, rating, created_at
+  activity_photos: id, activity_id, url, caption
+  collaborators (shared/multi-user maps): map_id, user_id, role
+  (owner/editor/viewer)
+
+  ## Feature plan
+  MVP: interactive Cape Cod map with pins, add/edit activity form, list view
+  with filters (category/status), auth, shareable public/collaborator links.
+  Later: photo galleries, comments, "trip mode" itineraries, import from
+  Google Maps saved lists, seasonal recommendations.
+
+  ## Non-goals (for now)
+  - Native mobile app
+  - Multi-tenant SaaS / billing
+  - Real-time collaborative editing
+
+  ## Conventions
+  - New features start as an OpenSpec change with a proposal before code is
+    written; archive the change once implemented.
+  - Keep specs and proposals lightweight and pragmatic given the small scope
+    of this project - avoid enterprise-y ceremony.
+
+rules:
+  proposal:
+    - Keep proposals concise; this is a 2-person personal project, not an
+      enterprise system.
+  design:
+    - Only document decisions that are actually undecided or non-obvious;
+      don't restate the whole stack.
+  tasks:
+    - Group tasks by logical step (scaffold, styling, map, data model,
+      deploy) rather than by file.
