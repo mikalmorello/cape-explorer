@@ -171,13 +171,14 @@
     },
     {
       "id": "pirates-cove-mini-golf",
-      "name": "Bass River Sports World (Pirate's Cove Adventure Golf)",
+      "name": "Pirate's Cove Adventure Golf",
       "type": "entertainment",
       "area": "South Yarmouth",
       "lat": 41.669,
       "lng": -70.1993,
       "website": "https://www.piratescove.net/locations/massachusetts/south-yarmouth/",
-      "notes": "728 Main St (Route 28). Shared complex: Pirate's Cove mini golf plus Bass River Sports World's go-karts, driving range, and batting cages.",
+      "photoAlbum": "https://photos.google.com/album/AF1QipO_HszX3BE6rR9CxNAKRUF5fHjGGtuMABTBaPRl",
+      "coverPhotoLink": "https://photos.app.goo.gl/dcM5DQfsDjjRTg6j9",
       "activities": [
         {
           "title": "Mini golf",
@@ -311,7 +312,7 @@
       "coordsVerified": false,
       "website": "https://www.devilspurse.com/",
       "photoAlbum": "https://photos.google.com/album/AF1QipOtHiFJ60YmitxvvMsKZioFH9W98VFE9cs33xci",
-      "notes": "120 Great Western Rd. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map. Full album requires an invite - awaiting a separate public cover-photo link.",
+      "coverPhotoLink": "https://photos.app.goo.gl/23cu5EtbV1biox8x7",
       "activities": [
         {
           "title": "Brewery",
