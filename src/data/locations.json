@@ -1,6 +1,23 @@
 {
   "locations": [
     {
+      "id": "cuffys-of-cape-cod",
+      "name": "Cuffy's of Cape Cod",
+      "type": "shopping",
+      "area": "West Dennis",
+      "lat": 41.662,
+      "lng": -70.169,
+      "coordsVerified": false,
+      "website": "https://cuffys.com/",
+      "notes": "721 Main St (Route 28) - flagship boardwalk store: shopping emporium, general store, confectionary, resort wear. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "Shopping",
+          "category": "shopping"
+        }
+      ]
+    },
+    {
       "id": "provincetown-ghost-tours",
       "name": "Provincetown Ghost Tours",
       "type": "attraction",

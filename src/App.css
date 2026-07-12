@@ -104,8 +104,22 @@
   max-width: 720px;
   margin: 0 auto;
   padding: 20px;
+}
+
+.region-group {
   display: grid;
   gap: 14px;
+  margin-bottom: 28px;
+}
+
+.region-heading {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+  margin: 0 0 4px;
 }
 
 .location-card {
