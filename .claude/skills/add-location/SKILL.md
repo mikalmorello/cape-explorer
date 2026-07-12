@@ -27,6 +27,11 @@ The file has a single `locations` array. Fields:
   couldn't be found and `lat`/`lng` are an address-based estimate.
   Mention it in `notes` too.
 - `website` (optional)
+- `photoAlbum` (optional): a Google Photos **shared** album URL
+  (`https://photos.app.goo.gl/...`). Photos are harvested from it at
+  deploy time into `src/data/photos.json`; remind the user that linked
+  albums become effectively public and that new photos appear after
+  the next deploy.
 - `notes` (optional): address, hours, tips
 - `activities` (optional array): may be empty — a location can be just
   a saved place

@@ -46,6 +46,16 @@ function LocationPopup({ location }) {
           Website
         </a>
       )}
+      {location.photoAlbum && (
+        <a
+          className="popup-photos-link"
+          href={location.photoAlbum}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Photos
+        </a>
+      )}
     </div>
   )
 }

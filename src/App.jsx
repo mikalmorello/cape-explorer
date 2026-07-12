@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MapView } from './features/map/MapView'
 import { LocationList } from './features/locations/LocationList'
+import { PhotosView } from './features/photos/PhotosView'
 import './App.css'
 
 function App() {
@@ -25,10 +26,19 @@ function App() {
           >
             List
           </button>
+          <button
+            type="button"
+            className={view === 'photos' ? 'active' : ''}
+            onClick={() => setView('photos')}
+          >
+            Photos
+          </button>
         </nav>
       </header>
       <main className="app-main">
-        {view === 'map' ? <MapView /> : <LocationList />}
+        {view === 'map' && <MapView />}
+        {view === 'list' && <LocationList />}
+        {view === 'photos' && <PhotosView />}
       </main>
     </div>
   )
