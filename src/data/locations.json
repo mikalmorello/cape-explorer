@@ -1,6 +1,23 @@
 {
   "locations": [
     {
+      "id": "provincetown-ghost-tours",
+      "name": "Provincetown Ghost Tours",
+      "type": "attraction",
+      "area": "Provincetown",
+      "lat": 42.053,
+      "lng": -70.174,
+      "coordsVerified": false,
+      "website": "https://www.provincetownghosttours.com/",
+      "notes": "Meets at The Coffee Pot, 315 Commercial St. 90-minute walking tour through the historic district and old cemeteries. Coordinates are an address-based estimate, not precisely geocoded - worth a spot-check on the map.",
+      "activities": [
+        {
+          "title": "Ghost tour",
+          "category": "sightseeing"
+        }
+      ]
+    },
+    {
       "id": "marconi-beach",
       "name": "Marconi Beach",
       "type": "beach",
