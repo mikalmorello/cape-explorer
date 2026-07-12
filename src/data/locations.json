@@ -125,6 +125,91 @@
       ]
     },
     {
+      "id": "cape-cod-creamery",
+      "name": "Cape Cod Creamery",
+      "area": "South Yarmouth",
+      "lat": 41.6672,
+      "lng": -70.1935,
+      "website": "https://www.capecodcreamery.com/",
+      "notes": "1199 Route 28 (5 Theater Colony Rd).",
+      "activities": [
+        {
+          "title": "Ice cream",
+          "category": "food"
+        }
+      ]
+    },
+    {
+      "id": "lewis-bay",
+      "name": "Lewis Bay",
+      "area": "Hyannis",
+      "lat": 41.636,
+      "lng": -70.2635,
+      "activities": [
+        {
+          "title": "Clamming",
+          "category": "fishing"
+        }
+      ]
+    },
+    {
+      "id": "nickerson-state-park",
+      "name": "Nickerson State Park",
+      "area": "Brewster",
+      "lat": 41.7726,
+      "lng": -69.9462,
+      "website": "https://www.mass.gov/locations/nickerson-state-park",
+      "notes": "3488 Main St (Route 6A).",
+      "activities": []
+    },
+    {
+      "id": "chatham-squire",
+      "name": "The Chatham Squire",
+      "area": "Chatham",
+      "lat": 41.682,
+      "lng": -69.9599,
+      "website": "https://www.thesquire.com/",
+      "notes": "487 Main St.",
+      "activities": [
+        {
+          "title": "Dinner and drinks",
+          "category": "food"
+        }
+      ]
+    },
+    {
+      "id": "brewster-store",
+      "name": "The Brewster Store",
+      "area": "Brewster",
+      "lat": 41.7602,
+      "lng": -70.0778,
+      "website": "https://www.brewsterstore.com/",
+      "notes": "1935 Main St (Route 6A at Route 124). Brewster Scoop is the ice cream parlor next to the store (summer only).",
+      "activities": [
+        {
+          "title": "Browse the general store",
+          "category": "shopping"
+        },
+        {
+          "title": "Ice cream at Brewster Scoop",
+          "category": "food"
+        }
+      ]
+    },
+    {
+      "id": "breakwater-beach",
+      "name": "Breakwater Beach",
+      "area": "Brewster",
+      "lat": 41.7649,
+      "lng": -70.079,
+      "activities": [
+        {
+          "title": "Tidal flats",
+          "category": "beach"
+        }
+      ]
+    },
+    {
       "id": "truro-vineyards",
       "name": "Truro Vineyards",
       "area": "North Truro",
