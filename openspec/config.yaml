@@ -8,12 +8,12 @@ context: |
   This is a 2-person personal project, not a commercial product.
 
   ## Stack (decided)
-  - Frontend: React + Vite, TypeScript
+  - Frontend: React + Vite, JavaScript (no TypeScript)
   - Map: Google Maps JS API (via @vis.gl/react-google-maps)
   - Backend/DB/Auth/Storage: Supabase (Postgres) - not yet wired up
   - Styling: not yet decided (likely Tailwind CSS, not yet added)
-  - Hosting: not yet decided/set up - do not add deploy config or discuss
-    hosting providers until explicitly asked
+  - Hosting: GitHub Pages, deployed via a GitHub Actions workflow on push
+    to main (see add-initial-scaffold change)
   - Repo: https://github.com/mikalmorello/cape-explorer
 
   ## Core data model (planned)

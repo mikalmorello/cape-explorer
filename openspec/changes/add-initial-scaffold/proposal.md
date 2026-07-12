@@ -25,6 +25,8 @@ come later once the app shell and map actually work.
 - `map-view`: Renders an interactive, Cape Cod-centered map (Google Maps)
   capable of showing activity pins. This change delivers the map shell and
   one dummy pin; activity-driven pins come in a later change.
+- `deployment`: The app is automatically built and published to GitHub
+  Pages on every push to `main`, so there is always a live, shareable URL.
 
 ### Modified Capabilities
 (none — this is the first change)
