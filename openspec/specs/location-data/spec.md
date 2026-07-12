@@ -22,14 +22,16 @@ activity SHALL have `title` and MAY have `category` and `notes`.
 
 ### Requirement: Data can be viewed as a list
 The app SHALL provide a list view, toggleable with the map view, that
-shows every location with its area, website, notes, activities (title
-and category), and — when a cover photo has been harvested for that
-location — a thumbnail of it.
+groups locations under region headings (Upper Cape, Mid Cape, Lower
+Cape, Outer Cape, Nantucket, Martha's Vineyard, in that geographic
+order; an "Other" group for any town not yet mapped to a region), and
+within each group shows every location with its area, website, notes,
+activities (title and category), and cover thumbnail when available.
 
 #### Scenario: Switching to list view
 - **WHEN** the user switches the view toggle to "List"
-- **THEN** all locations from the data source are shown as a readable
-  list instead of the map
+- **THEN** locations are shown grouped under region headings instead
+  of the map
 
 #### Scenario: Switching back to map
 - **WHEN** the user switches the toggle back to "Map"
@@ -43,6 +45,11 @@ location — a thumbnail of it.
 - **WHEN** a location has no cover photo
 - **THEN** its list card renders without a thumbnail, unchanged
   otherwise
+
+#### Scenario: Town not yet mapped to a region
+- **WHEN** a location's `area` isn't in the town-to-region lookup
+- **THEN** it appears under an "Other" group rather than being dropped
+  or causing an error
 
 ### Requirement: Locations have a primary type
 Each location SHALL have a `type` field (a lowercase string, e.g.
