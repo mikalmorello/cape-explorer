@@ -3,9 +3,7 @@
 ## Purpose
 Defines the shape of the app's location and activity data — the single
 source of truth the map and list views render from.
-
 ## Requirements
-
 ### Requirement: Locations and activities are defined in a static JSON data source
 The app SHALL load its location and activity data from a JSON file in
 the repo (`src/data/locations.json`). Each location SHALL have `id`,
@@ -62,3 +60,19 @@ seasonal or conditional rules SHALL be captured in the location's
 - **WHEN** a location's dog policy has not been verified
 - **THEN** the `dogFriendly` field is omitted entirely rather than set
   to a guessed value
+
+### Requirement: Locations may link a Google Photos shared album
+A location MAY have a `photoAlbum` field containing a Google Photos
+shared-album URL (e.g. `https://photos.app.goo.gl/...`). The app
+SHALL treat locations without the field as simply having no photos.
+
+#### Scenario: Location with a linked album
+- **WHEN** a location has a `photoAlbum` URL
+- **THEN** its photos are harvested at deploy time and shown in the
+  app's photo features
+
+#### Scenario: Location without a linked album
+- **WHEN** a location has no `photoAlbum` field
+- **THEN** it remains fully valid and appears everywhere else in the
+  app as before
+

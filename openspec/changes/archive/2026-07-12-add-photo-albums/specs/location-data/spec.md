@@ -2,8 +2,8 @@
 
 ### Requirement: Locations may link a Google Photos shared album
 A location MAY have a `photoAlbum` field containing a Google Photos
-shared-album URL (e.g. `https://photos.app.goo.gl/...`). Locations
-without the field simply have no photos.
+shared-album URL (e.g. `https://photos.app.goo.gl/...`). The app
+SHALL treat locations without the field as simply having no photos.
 
 #### Scenario: Location with a linked album
 - **WHEN** a location has a `photoAlbum` URL
