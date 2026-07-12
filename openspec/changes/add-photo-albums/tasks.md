@@ -31,7 +31,19 @@
 
 ## 5. Test with real album (owner-assisted)
 
-- [ ] 5.1 Owner shares one Google Photos shared-album link for a
+- [x] 5.1 Owner shares one Google Photos shared-album link for a
       location; wire it into that location's `photoAlbum`
-- [ ] 5.2 Deploy, verify via workflow logs (photo count > 0) and on
+- [x] 5.2 Deploy, verify via workflow logs (photo count > 0) and on
       the live site; if extraction fails, regroup on approach
+      (result: 22 photos extracted from the Pirate Adventures album;
+      owner confirmed rendering)
+
+## 6. Scope revision: cover-only (owner decision after testing)
+
+- [x] 6.1 Harvest only one cover URL per album; `photos.json` becomes
+      `{ locationId: coverUrl }`
+- [x] 6.2 Photos grid: one cover tile per album; detail shows cover +
+      "View album in Google Photos" link instead of inline gallery
+- [x] 6.3 Clean up: removed per-location photo cap and unused gallery
+      code; updated spec/design/proposal, README, and add-location
+      skill to match

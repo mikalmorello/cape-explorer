@@ -39,11 +39,14 @@ app's only compute, so harvesting happens there.
 - **Image sizing via URL suffix:** `lh3` URLs accept size directives;
   store the bare URL and append `=w400-h400-c` for grid thumbnails and
   `=w1600` for the detail gallery, so we never store multiple sizes.
-- **Grid = photos, not albums:** the Photos view shows individual
-  photos (capped per location to keep the grid balanced), each tagged
-  with its location name; clicking opens that location's detail with
-  the full gallery. Matches the owner's "album pic → location
-  details" browsing idea.
+- **Cover-only harvesting (owner decision, revised during testing):**
+  only the album's first photo URL is stored per location; the full
+  album opens via the Google Photos link. This shrinks the scraped
+  surface to one URL per location (less exposure to URL rot and page-
+  format changes), keeps `photos.json` tiny, and makes Google Photos
+  the system of record for galleries. The grid shows one labeled
+  cover tile per album; clicking shows location details + cover +
+  album link.
 
 ## Risks / Trade-offs
 

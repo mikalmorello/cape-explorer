@@ -18,16 +18,16 @@ into the repo, or Supabase Storage later).
 - Add an optional `photoAlbum` field to **Location**: a Google Photos
   shared-album URL.
 - Add a build-time script (`scripts/fetch-photos.mjs`, no new
-  dependencies) that fetches each linked shared album and extracts its
-  image URLs into `src/data/photos.json`. It runs inside the deploy
-  workflow before `vite build` — photos refresh **on deploy only** (no
-  scheduled rebuilds, per owner). If an album fetch fails, the build
-  continues with whatever data it has (empty gallery beats broken
-  deploy).
+  dependencies) that fetches each linked shared album and extracts
+  **one cover image URL** per album into `src/data/photos.json`. It
+  runs inside the deploy workflow before `vite build` — covers refresh
+  **on deploy only** (no scheduled rebuilds, per owner). If an album
+  fetch fails, the build continues with whatever data it has (missing
+  cover beats broken deploy).
 - Add a **Photos** view (third header toggle: Map | List | Photos): a
-  grid of photos from all linked albums; clicking a photo opens that
-  location's details (name, area, activities, notes, website) plus its
-  full gallery.
+  grid with one cover tile per linked album; clicking a cover opens
+  that location's details (name, area, activities, notes, website)
+  with its cover image and a link to the full album in Google Photos.
 - Show a "Photos" link in the map popup for locations that have a
   linked album.
 - Document the `photoAlbum` field in README and the `add-location`

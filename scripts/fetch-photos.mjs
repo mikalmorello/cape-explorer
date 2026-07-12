@@ -1,7 +1,9 @@
 // Build-time photo harvester: fetches each location's Google Photos
-// shared-album page and extracts its image URLs into src/data/photos.json.
-// Runs in the deploy workflow before `vite build`. Fail-open: a broken
-// album logs a warning and yields no photos; it never fails the build.
+// shared-album page and extracts one cover image URL per album into
+// src/data/photos.json ({ locationId: coverUrl }). Full albums are
+// reached via the album link itself, not harvested. Runs in the deploy
+// workflow before `vite build`. Fail-open: a broken album logs a
+// warning and yields no cover; it never fails the build.
 import { readFileSync, writeFileSync } from 'node:fs'
 
 const LOCATIONS_PATH = 'src/data/locations.json'
@@ -18,13 +20,12 @@ async function fetchAlbumImageUrls(albumUrl) {
   })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   const html = await res.text()
-  const urls = [...new Set([...html.matchAll(IMAGE_URL_RE)].map((m) => m[1]))]
-  return urls
+  return [...new Set([...html.matchAll(IMAGE_URL_RE)].map((m) => m[1]))]
 }
 
 const { locations } = JSON.parse(readFileSync(LOCATIONS_PATH, 'utf8'))
 const withAlbums = locations.filter((loc) => loc.photoAlbum)
-const photos = {}
+const covers = {}
 let failures = 0
 
 for (const loc of withAlbums) {
@@ -34,8 +35,8 @@ for (const loc of withAlbums) {
       failures++
       console.warn(`WARN ${loc.id}: album fetched but 0 image URLs extracted`)
     } else {
-      photos[loc.id] = urls
-      console.log(`OK   ${loc.id}: ${urls.length} photos`)
+      covers[loc.id] = urls[0]
+      console.log(`OK   ${loc.id}: cover selected (${urls.length} photos in album)`)
     }
   } catch (err) {
     failures++
@@ -43,8 +44,8 @@ for (const loc of withAlbums) {
   }
 }
 
-writeFileSync(PHOTOS_PATH, JSON.stringify(photos, null, 2) + '\n')
+writeFileSync(PHOTOS_PATH, JSON.stringify(covers, null, 2) + '\n')
 console.log(
-  `Wrote ${PHOTOS_PATH}: ${Object.keys(photos).length}/${withAlbums.length} albums harvested` +
+  `Wrote ${PHOTOS_PATH}: ${Object.keys(covers).length}/${withAlbums.length} covers harvested` +
     (failures ? `, ${failures} warnings` : ''),
 )

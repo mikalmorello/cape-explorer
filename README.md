@@ -66,11 +66,12 @@ Rules of thumb:
   been checked, and note any leash/seasonal conditions in `notes`.
   Leave it unset rather than guess.
 - `photoAlbum` must be a Google Photos **shared** album link ("anyone
-  with the link"). Photos are harvested at deploy time by
-  `scripts/fetch-photos.mjs` into `src/data/photos.json` and shown in
-  the Photos view — they refresh on each deploy, so after adding
-  photos to an album, re-run the deploy workflow (or push any commit).
-  Linked albums become effectively public via the site.
+  with the link"). At deploy time `scripts/fetch-photos.mjs` harvests
+  one **cover image** per album into `src/data/photos.json` for the
+  Photos view; the full album opens via the link itself. Covers
+  refresh on each deploy, so after changing an album, re-run the
+  deploy workflow (or push any commit). Linked albums become
+  effectively public via the site.
 
 To add or edit entries, use the `add-location` Claude skill
 (`.claude/skills/add-location/`) — or edit the JSON directly following

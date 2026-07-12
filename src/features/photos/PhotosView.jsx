@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import data from '../../data/locations.json'
-import photos from '../../data/photos.json'
+import covers from '../../data/photos.json'
 
 function locationById(id) {
   return data.locations.find((loc) => loc.id === id)
@@ -10,15 +10,15 @@ function thumbUrl(url) {
   return `${url}=w400-h400-c`
 }
 
-function largeUrl(url) {
-  return `${url}=w1600`
+function coverUrl(url) {
+  return `${url}=w1200`
 }
 
-function LocationDetail({ location, urls, onClose }) {
+function LocationDetail({ location, cover, onClose }) {
   return (
     <div className="photo-detail">
       <button type="button" className="photo-detail-back" onClick={onClose}>
-        &larr; All photos
+        &larr; All albums
       </button>
       <article className="location-card">
         <header>
@@ -43,21 +43,31 @@ function LocationDetail({ location, urls, onClose }) {
             Website
           </a>
         )}
-      </article>
-      <div className="photo-grid">
-        {urls.map((url) => (
-          <a key={url} href={largeUrl(url)} target="_blank" rel="noreferrer">
-            <img src={thumbUrl(url)} alt={location.name} loading="lazy" />
+        {location.photoAlbum && (
+          <a
+            className="popup-photos-link"
+            href={location.photoAlbum}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View album in Google Photos
           </a>
-        ))}
-      </div>
+        )}
+      </article>
+      <a href={location.photoAlbum} target="_blank" rel="noreferrer">
+        <img
+          className="photo-detail-cover"
+          src={coverUrl(cover)}
+          alt={location.name}
+        />
+      </a>
     </div>
   )
 }
 
 export function PhotosView() {
   const [selectedId, setSelectedId] = useState(null)
-  const entries = Object.entries(photos).filter(([id]) => locationById(id))
+  const entries = Object.entries(covers).filter(([id]) => locationById(id))
 
   if (entries.length === 0) {
     return (
@@ -65,7 +75,7 @@ export function PhotosView() {
         <p>
           No photo albums linked yet. Add a <code>photoAlbum</code> (Google
           Photos shared-album link) to a location in
-          <code> locations.json</code> — photos are pulled in on the next
+          <code> locations.json</code> — covers are pulled in on the next
           deploy.
         </p>
       </div>
@@ -76,7 +86,7 @@ export function PhotosView() {
     return (
       <LocationDetail
         location={locationById(selectedId)}
-        urls={photos[selectedId]}
+        cover={covers[selectedId]}
         onClose={() => setSelectedId(null)}
       />
     )
@@ -84,14 +94,14 @@ export function PhotosView() {
 
   return (
     <div className="photo-grid photo-grid-browse">
-      {entries.map(([id, urls]) => (
+      {entries.map(([id, cover]) => (
         <button
           key={id}
           type="button"
           className="photo-tile"
           onClick={() => setSelectedId(id)}
         >
-          <img src={thumbUrl(urls[0])} alt={locationById(id).name} loading="lazy" />
+          <img src={thumbUrl(cover)} alt={locationById(id).name} loading="lazy" />
           <span className="photo-tile-label">{locationById(id).name}</span>
         </button>
       ))}
