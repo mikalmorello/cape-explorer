@@ -28,10 +28,10 @@
       `main` and deploys via `actions/configure-pages` +
       `actions/upload-pages-artifact` + `actions/deploy-pages`, passing
       `VITE_GOOGLE_MAPS_API_KEY` from a `GOOGLE_MAPS_API_KEY` repo secret
-- [ ] 4.3 Walk the project owner through: creating a Google Maps API key
+- [x] 4.3 Walk the project owner through: creating a Google Maps API key
       in Google Cloud Console, restricting it by HTTP referrer to the
       Pages origin (+ localhost for dev), adding it as a
       `GOOGLE_MAPS_API_KEY` repository secret, and setting Settings →
       Pages → Source to "GitHub Actions"
-- [ ] 4.4 Confirm the workflow run succeeds and the site is reachable at
+- [x] 4.4 Confirm the workflow run succeeds and the site is reachable at
       `https://mikalmorello.github.io/cape-explorer/`
