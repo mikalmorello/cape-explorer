@@ -183,13 +183,36 @@
         {
           "title": "Mini golf",
           "category": "entertainment"
+        }
+      ]
+    },
+    {
+      "id": "bass-river-sports-world",
+      "name": "Bass River Sports World",
+      "type": "entertainment",
+      "area": "South Yarmouth",
+      "lat": 41.6556334,
+      "lng": -70.2090481,
+      "website": "https://skullislandcapecod.com/",
+      "activities": [
+        {
+          "title": "Mini golf",
+          "category": "entertainment"
+        },
+        {
+          "title": "Driving range",
+          "category": "entertainment"
+        },
+        {
+          "title": "Arcade",
+          "category": "entertainment"
         },
         {
           "title": "Go-karts",
           "category": "entertainment"
         },
         {
-          "title": "Driving range",
+          "title": "Batting cages",
           "category": "entertainment"
         }
       ]
