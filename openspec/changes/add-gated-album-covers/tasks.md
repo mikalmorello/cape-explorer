@@ -8,7 +8,7 @@
 - [x] 2.1 Set Sandy Neck Beach's `photoAlbum` to the gated album URL
       and `coverPhotoLink` to the public single-photo link the owner
       provided
-- [ ] 2.2 Deploy, verify via workflow logs that the cover harvests
+- [x] 2.2 Deploy, verify via workflow logs that the cover harvests
       successfully and the "view album" link still points at the
       gated URL
 
