@@ -55,3 +55,9 @@ export const REGION_ORDER = [
 export function regionForArea(area) {
   return TOWN_TO_REGION[area] ?? 'Other'
 }
+
+// Distinct `area` values present in the data, sorted alphabetically -
+// the options for the town filter.
+export function distinctAreas(locations) {
+  return [...new Set(locations.map((loc) => loc.area).filter(Boolean))].sort()
+}

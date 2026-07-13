@@ -28,6 +28,7 @@ function LocationPopup({ location }) {
     <div className="location-popup">
       <h2>{location.name}</h2>
       {location.area && <p className="popup-area">{location.area}</p>}
+      {location.address && <p className="popup-address">{location.address}</p>}
       {location.activities?.length > 0 && (
         <ul className="popup-activities">
           {location.activities.map((activity) => (
@@ -60,7 +61,7 @@ function LocationPopup({ location }) {
   )
 }
 
-export function MapView() {
+export function MapView({ town = 'all' }) {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
   const [selectedId, setSelectedId] = useState(null)
 
@@ -68,7 +69,9 @@ export function MapView() {
     return <MissingApiKeyNotice />
   }
 
-  const selected = data.locations.find((loc) => loc.id === selectedId)
+  const locations =
+    town === 'all' ? data.locations : data.locations.filter((loc) => loc.area === town)
+  const selected = locations.find((loc) => loc.id === selectedId)
 
   return (
     <APIProvider apiKey={apiKey}>
@@ -81,7 +84,7 @@ export function MapView() {
         styles={MAP_STYLES}
         onClick={() => setSelectedId(null)}
       >
-        {data.locations.map((location) => (
+        {locations.map((location) => (
           <Marker
             key={location.id}
             position={{ lat: location.lat, lng: location.lng }}

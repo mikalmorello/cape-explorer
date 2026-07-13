@@ -30,7 +30,8 @@ as cards.
       "dogFriendly": true,               // optional — only set when verified, never guessed
       "lat": 41.7387,                    // required — pin latitude
       "lng": -70.3822,                   // required — pin longitude
-      "area": "West Barnstable",         // optional — town/area, for future filtering
+      "area": "West Barnstable",         // optional — town/area; also the town-filter key
+      "address": "…, West Barnstable, MA …", // optional — full street address, informational
       "coordsVerified": false,           // optional — present + false when coords are an estimate
       "website": "https://…",            // optional
       "photoAlbum": "https://photos.app.goo.gl/…", // optional — link to the full album (public or gated)
@@ -58,6 +59,13 @@ Rules of thumb:
 - A **location** is a specific spot, not a town — "Downtown
   Provincetown" and "Provincetown Dunes" are separate locations that
   share `area: "Provincetown"`.
+- The app header has a **town filter** (derived from the distinct
+  `area` values in the data — no separate list to maintain) that
+  narrows both the Map and List views to one town at a time.
+- `address` is the full street address, verified the same way as
+  coordinates (search it, never guess). It's purely informational —
+  filtering still keys off `area`, so always set `area` too even when
+  `address` is present.
 - A location with no activities yet is fine — it's just a saved place.
 - Coordinates should be verified (not guessed) so pins land on the
   actual spot when zoomed in. When a precise geocode can't be found,

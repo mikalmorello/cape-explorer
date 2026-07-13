@@ -24,17 +24,24 @@ Massachusetts, when the app loads.
 
 ### Requirement: Map displays at least one pin
 The map SHALL display one marker (pin) per location loaded from the
-app's location data source. No hardcoded dummy marker is displayed.
+app's location data source that matches the active town filter (or
+every location when "All towns" is selected). No hardcoded dummy
+marker is displayed.
 
 #### Scenario: All locations appear as pins
-- **WHEN** the map renders successfully
+- **WHEN** the map renders successfully with "All towns" selected
 - **THEN** every location in the data source is shown as a marker at
   its `lat`/`lng`, and no dummy marker is displayed
+
+#### Scenario: Town filter narrows the pins shown
+- **WHEN** a specific town is selected in the town filter
+- **THEN** only locations whose `area` matches that town are shown as
+  markers
 
 ### Requirement: Pin click shows location details
 Clicking a marker SHALL open an info popup for that location showing
 its name, its activities (title and category), and — when present —
-its area, website link, and notes.
+its area, address, website link, and notes.
 
 #### Scenario: Location with activities and website
 - **WHEN** the user clicks the marker of a location that has

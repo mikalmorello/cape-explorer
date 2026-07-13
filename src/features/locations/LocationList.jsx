@@ -37,6 +37,7 @@ function LocationCard({ location }) {
             <h2>{location.name}</h2>
             {location.area && <span className="card-area">{location.area}</span>}
           </header>
+          {location.address && <p className="card-address">{location.address}</p>}
           {location.activities?.length > 0 && (
             <ul className="card-activities">
               {location.activities.map((activity) => (
@@ -71,7 +72,20 @@ function LocationCard({ location }) {
   )
 }
 
-export function LocationList() {
+export function LocationList({ town = 'all' }) {
+  if (town !== 'all') {
+    const locations = data.locations.filter((loc) => loc.area === town)
+    return (
+      <div className="location-list">
+        <section className="region-group">
+          {locations.map((location) => (
+            <LocationCard key={location.id} location={location} />
+          ))}
+        </section>
+      </div>
+    )
+  }
+
   const regions = groupByRegion(data.locations)
 
   return (

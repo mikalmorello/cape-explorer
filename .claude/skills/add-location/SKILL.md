@@ -21,8 +21,11 @@ The file has a single `locations` array. Fields:
 - `dogFriendly` (optional boolean): only set when the place's actual
   policy has been checked (search it); never guess. Leave unset if
   unknown.
-- `area` (optional): town/area, e.g. `"Provincetown"` — used for
-  future filtering; specific spots in the same town share an `area`
+- `area` (optional): town/area, e.g. `"Provincetown"` — this is the
+  town-filter key; specific spots in the same town share an `area`
+- `address` (optional): full street address. Verify it the same way as
+  coordinates (search it, never guess). Purely informational — the
+  town filter still uses `area`, so set both, not just `address`.
 - `coordsVerified` (optional, `false`): set when a precise geocode
   couldn't be found and `lat`/`lng` are an address-based estimate.
 - `website` (optional)

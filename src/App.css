@@ -41,6 +41,23 @@
   background: var(--border);
 }
 
+.town-filter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.town-filter select {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
 .app-main {
   flex: 1;
   min-height: 0;
@@ -73,6 +90,12 @@
 }
 
 .popup-area {
+  font-size: 12px;
+  color: #777;
+  margin: 0 0 6px;
+}
+
+.popup-address {
   font-size: 12px;
   color: #777;
   margin: 0 0 6px;
@@ -162,6 +185,13 @@
   font-size: 13px;
   color: var(--text);
   white-space: nowrap;
+}
+
+.card-address {
+  font-size: 13px;
+  color: var(--text);
+  opacity: 0.75;
+  margin: 0 0 6px;
 }
 
 .card-activities {
