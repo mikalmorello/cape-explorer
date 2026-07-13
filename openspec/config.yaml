@@ -10,29 +10,47 @@ context: |
   ## Stack (decided)
   - Frontend: React + Vite, JavaScript (no TypeScript)
   - Map: Google Maps JS API (via @vis.gl/react-google-maps)
-  - Backend/DB/Auth/Storage: Supabase (Postgres) - not yet wired up
-  - Styling: not yet decided (likely Tailwind CSS, not yet added)
+  - Backend/DB/Auth/Storage: none - fully static, no backend, no user
+    accounts. Data lives in src/data/locations.json, committed to the repo.
+  - Photos: no Photos API/backend - a build-time script scrapes cover
+    images from Google Photos shared-album pages (see photo-gallery spec)
+  - Styling: plain CSS (src/App.css), no framework
   - Hosting: GitHub Pages, deployed via a GitHub Actions workflow on push
-    to main (see add-initial-scaffold change)
+    to main
   - Repo: https://github.com/mikalmorello/cape-explorer
 
-  ## Core data model (planned)
-  activities: id, user_id, title, category, status (done/want-to-do), lat,
-  lng, address, date_visited, notes, rating, created_at
-  activity_photos: id, activity_id, url, caption
-  collaborators (shared/multi-user maps): map_id, user_id, role
-  (owner/editor/viewer)
+  ## Core data model (current)
+  See openspec/specs/location-data/spec.md for the authoritative shape.
+  Summary: locations.json holds one array of locations (id, name, type,
+  lat, lng, optional area/address/dogFriendly/website/photoAlbum/
+  coverPhotoLink/notes, and an activities array of title/category/notes).
+  No user_id, no status field - this is a list of things done, not a
+  todo list, and there are no per-user accounts.
 
   ## Feature plan
-  MVP: interactive Cape Cod map with pins, add/edit activity form, list view
-  with filters (category/status), auth, shareable public/collaborator links.
-  Later: photo galleries, comments, "trip mode" itineraries, import from
-  Google Maps saved lists, seasonal recommendations.
+  Built: interactive Cape Cod map with pins, List view (grouped by region,
+  filterable by town), Photos view (cover grid + drill-down), town filter
+  shared across Map/List, build-time photo cover harvesting.
+  Later / not yet started: see "Future design references" below for
+  inspiration once we get to a broader design pass.
 
   ## Non-goals (for now)
   - Native mobile app
-  - Multi-tenant SaaS / billing
+  - Multi-tenant SaaS / billing / user accounts
   - Real-time collaborative editing
+  - Any backend or paid API surface beyond the Google Maps JS API free tier
+
+  ## Future design references
+  Not actionable yet - just inspiration to revisit whenever we do a
+  broader design pass on the map/browsing experience:
+  - https://www.town.shimane-misato.lg.jp/misatoto/ - interactive map
+    layout, animation, and interaction style worth drawing from.
+  - Google Maps API "More than a Map" gallery page (a mosaic of photos
+    that leads into finding/exploring places by image) - relevant to a
+    possible "find places by photo" browsing mode alongside Map/List/Photos.
+  - https://www.illustrationx.com/styles/maps - illustrated/stylized map
+    art direction reference, for whenever custom map styling or pin
+    icons get designed.
 
   ## Conventions
   - New features start as an OpenSpec change with a proposal before code is

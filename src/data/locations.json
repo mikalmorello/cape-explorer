@@ -467,6 +467,8 @@
       "lat": 42.043,
       "lng": -70.1935,
       "coordsVerified": false,
+      "photoAlbum": "https://photos.google.com/album/AF1QipNW6pRvw5abidlJnzEfXV_rqQOqZTl3FJjfALC0",
+      "coverPhotoLink": "https://photos.app.goo.gl/WC6KbmZqo9Dctt3bA",
       "activities": [
         {
           "title": "Jetty walk to Long Point",
@@ -482,6 +484,8 @@
       "lat": 41.701,
       "lng": -70.1875,
       "coordsVerified": false,
+      "photoAlbum": "https://photos.google.com/album/AF1QipOIz5C4WPzHJNbh-W_6ciKTHJAB3ImMjAfGD2z4",
+      "coverPhotoLink": "https://photos.app.goo.gl/WAcRK4uayhtt7hCF6",
       "activities": [
         {
           "title": "Crabbing",
@@ -513,6 +517,7 @@
       "name": "The Beachcomber",
       "type": "food",
       "area": "Wellfleet",
+      "address": "1120 Cahoon Hollow Rd, Wellfleet, MA 02667",
       "lat": 41.942346,
       "lng": -69.98318,
       "website": "https://thebeachcomber.com/",
