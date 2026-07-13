@@ -24,7 +24,7 @@ for the thumbnail) is unaffected and continues to work as documented.
 
 ## What Changes
 
-- Remove `photoAlbum` from the 27 locations that had a
+- Remove `photoAlbum` from the 28 locations that had a
   `photos.google.com/album/...` personal-library link: Cuffy's of Cape
   Cod, Provincetown Ghost Tours, Marconi Beach, Captain Baker Donut
   Shop, Cape Cod Pirate Adventures, Wellfleet Drive-In, Provincetown
@@ -34,8 +34,9 @@ for the thumbnail) is unaffected and continues to work as documented.
   Pancake Man, The Beachcomber, Crab Creek Conservation Area,
   Provincetown Breakwater, Downtown Provincetown, Provincetown Brewing
   Co., Race Point Beach, Nickerson State Park, The Brewster Store,
-  Breakwater Beach, Cape Cod Waterways (the last ten added after this
-  proposal was drafted, using the same pattern pending this decision).
+  Breakwater Beach, Cape Cod Waterways, Wilbur Park (the last eleven
+  added after this proposal was drafted, using the same pattern
+  pending this decision).
   Their
   `coverPhotoLink` stays, so covers keep showing; the site simply has
   no "view full album" link
