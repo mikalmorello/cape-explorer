@@ -302,6 +302,28 @@
       "activities": []
     },
     {
+      "id": "flax-pond",
+      "name": "Flax Pond",
+      "type": "park",
+      "dogFriendly": true,
+      "area": "Brewster",
+      "address": "320 Flax Pond Rd, Brewster, MA 02631",
+      "lat": 41.7667,
+      "lng": -70.0263,
+      "photoAlbum": "https://photos.google.com/u/1/album/AF1QipNzplwa-JTpP_obfsFYO_bmccD2Q8SdIQIFxc-d",
+      "coverPhotoLink": "https://photos.app.goo.gl/YbqXKmsNgcWmgWi29",
+      "activities": [
+        {
+          "title": "Swimming",
+          "category": "watersports"
+        },
+        {
+          "title": "Hiking",
+          "category": "hike"
+        }
+      ]
+    },
+    {
       "id": "chatham-squire",
       "name": "The Chatham Squire",
       "type": "food",
