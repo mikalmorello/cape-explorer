@@ -159,6 +159,21 @@
       ]
     },
     {
+      "id": "race-point-beach",
+      "name": "Race Point Beach",
+      "type": "beach",
+      "area": "Provincetown",
+      "lat": 42.0812135,
+      "lng": -70.2161384,
+      "website": "https://www.nps.gov/caco/planyourvisit/race-point-beach.htm",
+      "activities": [
+        {
+          "title": "Beach",
+          "category": "beach"
+        }
+      ]
+    },
+    {
       "id": "lighthouse-beach",
       "name": "Lighthouse Beach",
       "type": "beach",
