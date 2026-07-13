@@ -293,6 +293,8 @@
       "lat": 41.7726,
       "lng": -69.9462,
       "website": "https://www.mass.gov/locations/nickerson-state-park",
+      "photoAlbum": "https://photos.google.com/album/AF1QipP6OHibjjWT0MAHUEgBbHG8s9rEjgk7SHhWeGez",
+      "coverPhotoLink": "https://photos.app.goo.gl/921EDYqFr9JRNcxx6",
       "activities": []
     },
     {
@@ -318,6 +320,8 @@
       "lat": 41.7602,
       "lng": -70.0778,
       "website": "https://www.brewsterstore.com/",
+      "photoAlbum": "https://photos.google.com/album/AF1QipNzZ8SFDmJCrXz3GRB2vuy2DL9aPCWHygUSZIs_",
+      "coverPhotoLink": "https://photos.app.goo.gl/rZjy75Xh1ztu5xaY8",
       "activities": [
         {
           "title": "Browse the general store",
@@ -336,6 +340,8 @@
       "area": "Brewster",
       "lat": 41.7649,
       "lng": -70.079,
+      "photoAlbum": "https://photos.google.com/album/AF1QipMRD6BaCtHL90MtZHQa-AgNgXGNmRuqAn7Je1Dz",
+      "coverPhotoLink": "https://photos.app.goo.gl/zqwkgQAvSsXdNPvaA",
       "activities": [
         {
           "title": "Tidal flats",
