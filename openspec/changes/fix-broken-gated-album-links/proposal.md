@@ -24,16 +24,17 @@ for the thumbnail) is unaffected and continues to work as documented.
 
 ## What Changes
 
-- Remove `photoAlbum` from the 17 locations that had a
+- Remove `photoAlbum` from the 18 locations that had a
   `photos.google.com/album/...` personal-library link: Cuffy's of Cape
   Cod, Provincetown Ghost Tours, Marconi Beach, Captain Baker Donut
   Shop, Cape Cod Pirate Adventures, Wellfleet Drive-In, Provincetown
   Dunes, Sandy Neck Beach, Pirate's Cove Adventure Golf, Bass River
   Sports World, Cape Cod Creamery, Lewis Bay, Devil's Purse Brewing,
   Ryan Family Amusements, Wicked Waves Cape Cod, Truro Vineyards, The
-  Pancake Man. Their `coverPhotoLink` stays, so covers keep showing;
-  the site simply has no "view full album" link for these until a real
-  link exists.
+  Pancake Man, The Beachcomber (added after this proposal was drafted,
+  using the same pattern pending this decision). Their `coverPhotoLink`
+  stays, so covers keep showing; the site simply has no "view full
+  album" link for these until a real link exists.
 - Correct `location-data` and `photo-gallery` specs: `photoAlbum` is
   only ever a public "anyone with the link" URL (e.g.
   `photos.app.goo.gl/...`); there is no gated form of this field.
