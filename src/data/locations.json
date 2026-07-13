@@ -544,6 +544,18 @@
       ]
     },
     {
+      "id": "west-dennis-beach",
+      "name": "West Dennis Beach",
+      "type": "beach",
+      "area": "West Dennis",
+      "lat": 41.643,
+      "lng": -70.15,
+      "coordsVerified": false,
+      "photoAlbum": "https://photos.google.com/u/1/album/AF1QipPobuSvio5lGbPdaZeR2rhM29mSJZgBjn2oBMj8",
+      "coverPhotoLink": "https://photos.app.goo.gl/39vC3gkNtuDffRnb7",
+      "activities": []
+    },
+    {
       "id": "the-beachcomber",
       "name": "The Beachcomber",
       "type": "food",
