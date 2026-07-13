@@ -509,6 +509,25 @@
       ]
     },
     {
+      "id": "the-beachcomber",
+      "name": "The Beachcomber",
+      "type": "food",
+      "area": "Wellfleet",
+      "lat": 41.942346,
+      "lng": -69.98318,
+      "website": "https://thebeachcomber.com/",
+      "activities": [
+        {
+          "title": "Food and drinks",
+          "category": "food"
+        },
+        {
+          "title": "Beach",
+          "category": "beach"
+        }
+      ]
+    },
+    {
       "id": "cape-cod-waterways",
       "name": "Cape Cod Waterways",
       "type": "attraction",
