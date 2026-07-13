@@ -97,6 +97,12 @@ Rules of thumb:
   into `src/data/photos.json` for the Photos view. Covers refresh on
   each deploy, so after changing a link, re-run the deploy workflow
   (or push any commit).
+- The harvester caches results across deploys
+  (`src/data/photos-cache.json`, restored via `actions/cache`) and only
+  re-fetches a location whose link actually changed — most deploys make
+  few or no photo requests. A fetch failure keeps the last-known-good
+  cover instead of dropping it, and results are reported in the
+  workflow run's job summary.
 
 To add or edit entries, use the `add-location` Claude skill
 (`.claude/skills/add-location/`) — or edit the JSON directly following

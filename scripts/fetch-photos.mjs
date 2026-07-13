@@ -4,11 +4,19 @@
 // album is gated to invited people) and falls back to `photoAlbum`.
 // Full albums are reached via `photoAlbum` itself, not harvested. Runs
 // in the deploy workflow before `vite build`. Fail-open: a broken link
-// logs a warning and yields no cover; it never fails the build.
-import { readFileSync, writeFileSync } from 'node:fs'
+// logs a warning and keeps the last-known-good cover (or yields none,
+// if there's never been one) rather than failing the build.
+//
+// src/data/photos-cache.json ({ locationId: { sourceUrl, coverUrl } })
+// persists across deploys via actions/cache. A location whose source
+// URL hasn't changed since the last successful harvest is skipped
+// entirely - no network request - which is what keeps most deploys
+// from re-fetching everything.
+import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 
 const LOCATIONS_PATH = 'src/data/locations.json'
 const PHOTOS_PATH = 'src/data/photos.json'
+const CACHE_PATH = 'src/data/photos-cache.json'
 
 // A shared-album or single-item share page's og:image meta tag
 // reflects its actual chosen cover (same image used for link
@@ -36,21 +44,43 @@ async function fetchCoverUrl(pageUrl) {
   return null
 }
 
+function loadCache() {
+  if (!existsSync(CACHE_PATH)) return {}
+  try {
+    return JSON.parse(readFileSync(CACHE_PATH, 'utf8'))
+  } catch {
+    return {}
+  }
+}
+
 const { locations } = JSON.parse(readFileSync(LOCATIONS_PATH, 'utf8'))
 const withLinks = locations.filter((loc) => loc.coverPhotoLink || loc.photoAlbum)
+const cache = loadCache()
 const covers = {}
-let failures = 0
+const failures = []
+let skipped = 0
 
 for (const loc of withLinks) {
   const source = loc.coverPhotoLink ?? loc.photoAlbum
   const usingFallback = !loc.coverPhotoLink
+  const cached = cache[loc.id]
+
+  if (cached && cached.sourceUrl === source) {
+    covers[loc.id] = cached.coverUrl
+    skipped++
+    console.log(`SKIP ${loc.id}: unchanged source, reusing cached cover`)
+    continue
+  }
+
   try {
     const result = await fetchCoverUrl(source)
     if (!result) {
-      failures++
+      failures.push({ id: loc.id, reason: 'no cover image found' })
       console.warn(`WARN ${loc.id}: fetched but no cover image found`)
+      if (cached) covers[loc.id] = cached.coverUrl
     } else {
       covers[loc.id] = result.url
+      cache[loc.id] = { sourceUrl: source, coverUrl: result.url }
       console.log(
         `OK   ${loc.id}: cover selected (${result.source}` +
           (usingFallback ? ', via photoAlbum' : ', via coverPhotoLink') +
@@ -58,13 +88,33 @@ for (const loc of withLinks) {
       )
     }
   } catch (err) {
-    failures++
+    failures.push({ id: loc.id, reason: err.message })
     console.warn(`WARN ${loc.id}: fetch failed (${err.message})`)
+    if (cached) {
+      covers[loc.id] = cached.coverUrl
+      console.log(`     ${loc.id}: keeping last-known-good cover from cache`)
+    }
   }
 }
 
 writeFileSync(PHOTOS_PATH, JSON.stringify(covers, null, 2) + '\n')
-console.log(
-  `Wrote ${PHOTOS_PATH}: ${Object.keys(covers).length}/${withLinks.length} covers harvested` +
-    (failures ? `, ${failures} warnings` : ''),
-)
+writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2) + '\n')
+
+const fetched = withLinks.length - skipped
+const summaryLines = [
+  '## Photo harvest',
+  '',
+  `${Object.keys(covers).length}/${withLinks.length} locations have a cover ` +
+    `(${skipped} skipped unchanged, ${fetched - failures.length}/${fetched} fetches succeeded).`,
+]
+if (failures.length) {
+  summaryLines.push(
+    '',
+    '### Failed fetches',
+    ...failures.map((f) => `- ⚠️ \`${f.id}\`: ${f.reason}`),
+  )
+}
+console.log(summaryLines.join('\n'))
+if (process.env.GITHUB_STEP_SUMMARY) {
+  writeFileSync(process.env.GITHUB_STEP_SUMMARY, summaryLines.join('\n') + '\n', { flag: 'a' })
+}

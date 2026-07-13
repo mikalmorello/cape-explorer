@@ -1,8 +1,5 @@
-# photo-gallery Specification
+## MODIFIED Requirements
 
-## Purpose
-TBD - created by archiving change add-photo-albums. Update Purpose after archive.
-## Requirements
 ### Requirement: Album covers are harvested from shared albums at build time
 The deploy pipeline SHALL, before building the app, fetch a cover image
 for each location that has a `photoAlbum` or `coverPhotoLink`,
@@ -60,27 +57,3 @@ Actions job summary. Covers refresh only when a deploy runs.
 - **THEN** the build completes anyway, the location simply has no
   cover, and the workflow log and job summary show a warning for that
   album
-
-### Requirement: Photo grid view with location drill-down
-The app SHALL provide a Photos view, toggleable alongside Map and
-List, showing a grid with exactly one cover photo per linked album,
-labeled with the location name. Selecting a cover SHALL show that
-location's details (name, area, activities, notes, website), its
-cover image, and a link to open the full album in Google Photos.
-
-#### Scenario: Browsing the grid
-- **WHEN** the user opens the Photos view and albums have been linked
-- **THEN** the grid shows one cover tile per album, each labeled with
-  its location
-
-#### Scenario: Drilling into a location
-- **WHEN** the user clicks an album cover in the grid
-- **THEN** the location's details are shown with its cover image and a
-  link that opens the full album in Google Photos
-
-#### Scenario: No albums linked
-- **WHEN** no location has a `photoAlbum` (or no covers were
-  harvested)
-- **THEN** the Photos view shows a friendly explanation instead of an
-  empty grid
-

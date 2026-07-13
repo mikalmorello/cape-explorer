@@ -24,6 +24,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Restore photo harvest cache
+        uses: actions/cache@v4
+        with:
+          path: src/data/photos-cache.json
+          key: photo-harvest-${{ github.run_id }}
+          restore-keys: |
+            photo-harvest-
       - name: Fetch photos from shared albums
         run: node scripts/fetch-photos.mjs
       - run: npm run build
