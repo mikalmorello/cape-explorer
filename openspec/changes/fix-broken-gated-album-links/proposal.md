@@ -24,7 +24,7 @@ for the thumbnail) is unaffected and continues to work as documented.
 
 ## What Changes
 
-- Remove `photoAlbum` from the 34 locations that had a
+- Remove `photoAlbum` from the 35 locations that had a
   `photos.google.com/album/...` personal-library link: Cuffy's of Cape
   Cod, Provincetown Ghost Tours, Marconi Beach, Captain Baker Donut
   Shop, Cape Cod Pirate Adventures, Wellfleet Drive-In, Provincetown
@@ -36,9 +36,9 @@ for the thumbnail) is unaffected and continues to work as documented.
   Co., Race Point Beach, Nickerson State Park, The Brewster Store,
   Breakwater Beach, Cape Cod Waterways, Wilbur Park, The Chatham
   Squire, Lighthouse Beach, West Dennis Beach, Smugglers Beach, Flax
-  Pond, Hog Island Beer Co. (the last seventeen added after this
-  proposal was drafted, using
-  the same pattern pending this decision). Their
+  Pond, Hog Island Beer Co., Chatham Fish Pier (the last eighteen added
+  after this proposal was drafted, using the same pattern pending this
+  decision). Their
   `coverPhotoLink` stays, so covers keep showing; the site simply has
   no "view full album" link
   for these until a real link exists.

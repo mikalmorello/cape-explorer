@@ -420,6 +420,8 @@
       "lat": 41.6714,
       "lng": -69.9516,
       "coordsVerified": false,
+      "photoAlbum": "https://photos.google.com/u/1/album/AF1QipP5iTwB1W_dTVlVqBPURldZZDFHH6DsMKgjkGnQ",
+      "coverPhotoLink": "https://photos.app.goo.gl/aHy5LZ1ARZLyqKFr8",
       "activities": [
         {
           "title": "View fishing boats returning",
@@ -579,7 +581,12 @@
       "coordsVerified": false,
       "photoAlbum": "https://photos.google.com/u/1/album/AF1QipPobuSvio5lGbPdaZeR2rhM29mSJZgBjn2oBMj8",
       "coverPhotoLink": "https://photos.app.goo.gl/39vC3gkNtuDffRnb7",
-      "activities": []
+      "activities": [
+        {
+          "title": "Beach",
+          "category": "beach"
+        }
+      ]
     },
     {
       "id": "the-beachcomber",
