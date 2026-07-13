@@ -34,7 +34,10 @@ function LocationCard({ location }) {
         )}
         <div className="card-body">
           <header>
-            <h2>{location.name}</h2>
+            <h2>
+              {location.name}
+              {location.closed && <span className="closed-badge">Closed</span>}
+            </h2>
             {location.area && <span className="card-area">{location.area}</span>}
           </header>
           {location.address && <p className="card-address">{location.address}</p>}

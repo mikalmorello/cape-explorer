@@ -26,7 +26,10 @@ function MissingApiKeyNotice() {
 function LocationPopup({ location }) {
   return (
     <div className="location-popup">
-      <h2>{location.name}</h2>
+      <h2>
+        {location.name}
+        {location.closed && <span className="closed-badge">Closed</span>}
+      </h2>
       {location.area && <p className="popup-area">{location.area}</p>}
       {location.address && <p className="popup-address">{location.address}</p>}
       {location.activities?.length > 0 && (

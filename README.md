@@ -27,6 +27,7 @@ as cards.
       "id": "sandy-neck-beach",          // required — kebab-case slug, unique
       "name": "Sandy Neck Beach",        // required — display name
       "type": "beach",                   // required — primary category (see below)
+      "closed": false,                   // optional — true if the place has closed; still shown, marked "Closed"
       "dogFriendly": true,               // optional — only set when verified, never guessed
       "lat": 41.7387,                    // required — pin latitude
       "lng": -70.3822,                   // required — pin longitude

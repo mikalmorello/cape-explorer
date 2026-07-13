@@ -537,6 +537,28 @@
       ]
     },
     {
+      "id": "provincetown-brewing",
+      "name": "Provincetown Brewing Co.",
+      "type": "brewery",
+      "closed": true,
+      "dogFriendly": true,
+      "area": "Provincetown",
+      "address": "247 Commercial St, Provincetown, MA 02657",
+      "lat": 42.0525,
+      "lng": -70.181,
+      "coordsVerified": false,
+      "website": "https://ptownbrewingco.com/",
+      "photoAlbum": "https://photos.google.com/album/AF1QipOL_Sy4-xI82xdzmjehpf5tjtEuuMP4aqwlaMKH",
+      "coverPhotoLink": "https://photos.app.goo.gl/iXYbPB93gFG6af5U9",
+      "notes": "Closed until they find a new location.",
+      "activities": [
+        {
+          "title": "Food and drinks",
+          "category": "food"
+        }
+      ]
+    },
+    {
       "id": "cape-cod-waterways",
       "name": "Cape Cod Waterways",
       "type": "attraction",

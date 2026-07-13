@@ -7,7 +7,7 @@ source of truth the map and list views render from.
 ### Requirement: Locations and activities are defined in a static JSON data source
 The app SHALL load its location and activity data from a JSON file in
 the repo (`src/data/locations.json`). Each location SHALL have `id`,
-`name`, `type`, `lat`, `lng`, and MAY have `area`, `address`,
+`name`, `type`, `lat`, `lng`, and MAY have `area`, `address`, `closed`,
 `dogFriendly`, `coordsVerified`, `website`, `notes`, and an
 `activities` array. Each activity SHALL have `title` and MAY have
 `category` and `notes`.
@@ -129,3 +129,18 @@ List views so both reflect the same active filter.
 - **WHEN** a specific town is selected and the user is on the List view
 - **THEN** the matching cards are shown without a region heading, since
   they all share one town
+
+### Requirement: Locations may be marked closed
+A location MAY have a `closed` boolean field. When `true`, the app
+SHALL still show the location on the Map and in the List (preserving
+its activity history) but SHALL visibly mark it as closed rather than
+presenting it as currently operating.
+
+#### Scenario: Closed location still appears
+- **WHEN** a location has `closed: true`
+- **THEN** it still appears as a pin on the Map and a card in the List,
+  with a visible "Closed" indicator
+
+#### Scenario: Location without the field
+- **WHEN** a location has no `closed` field
+- **THEN** it is treated as open, unchanged from current behavior

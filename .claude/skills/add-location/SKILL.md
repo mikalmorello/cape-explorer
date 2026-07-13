@@ -21,6 +21,9 @@ The file has a single `locations` array. Fields:
 - `dogFriendly` (optional boolean): only set when the place's actual
   policy has been checked (search it); never guess. Leave unset if
   unknown.
+- `closed` (optional boolean): set to `true` if the place has closed.
+  It stays on the Map/List (keeps the visit history) but shows a
+  "Closed" badge.
 - `area` (optional): town/area, e.g. `"Provincetown"` — this is the
   town-filter key; specific spots in the same town share an `area`
 - `address` (optional): full street address. Verify it the same way as
