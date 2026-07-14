@@ -65,6 +65,20 @@ The file has a single `locations` array. Fields:
   brewery, sightseeing, watersports — reuse before inventing new ones)
 - `notes` (optional)
 
+**Itinerary** — a hand-picked day plan (top-level `itineraries` array,
+sibling to `locations`):
+- `id` (required): kebab-case slug, unique
+- `name` (required): display name
+- `notes` (optional): itinerary-level, same "user's own words" rule
+- `stops` (required array): ordered `{ locationId, note }` — `locationId`
+  must reference an existing location; `note` is a short label
+  ("Morning", "After"). Everything else about the stop (name, area,
+  activities, cover) is looked up live from the location — never
+  duplicate those fields into the stop.
+- **Entirely hand-curated, like `notes`.** Only add an itinerary when
+  the user describes a real plan from actual experience — never invent
+  or suggest one by proximity, type, or any heuristic.
+
 ## Rules
 
 1. **A location is a specific spot, not a town.** If the user names a

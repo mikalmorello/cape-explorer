@@ -667,5 +667,21 @@
         }
       ]
     }
+  ],
+  "itineraries": [
+    {
+      "id": "nauset-then-hog-island",
+      "name": "Nauset Light Beach → Hog Island Beer Co.",
+      "stops": [
+        {
+          "locationId": "nauset-light-beach",
+          "note": "Morning"
+        },
+        {
+          "locationId": "hog-island-beer-co",
+          "note": "After"
+        }
+      ]
+    }
   ]
 }

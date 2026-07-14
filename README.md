@@ -108,6 +108,34 @@ To add or edit entries, use the `add-location` Claude skill
 (`.claude/skills/add-location/`) — or edit the JSON directly following
 the shape above. Pushing to `main` deploys automatically.
 
+## Itineraries
+
+`locations.json` also has a top-level `itineraries` array — hand-picked
+day plans stringing a few locations together in order:
+
+```jsonc
+{
+  "itineraries": [
+    {
+      "id": "nauset-then-hog-island",      // required — kebab-case slug, unique
+      "name": "Nauset Light Beach → Hog Island Beer Co.", // required
+      "notes": "…",                        // optional, itinerary-level
+      "stops": [                           // required — ordered
+        { "locationId": "nauset-light-beach", "note": "Morning" },
+        { "locationId": "hog-island-beer-co", "note": "After" }
+      ]
+    }
+  ]
+}
+```
+
+A stop only stores `locationId` + a short `note` ("Morning", "After")
+— everything else (name, area, activities, cover) is looked up live
+from the referenced location, so it can never drift out of sync.
+**Itineraries are entirely hand-curated, same as `notes`** — only add
+one when describing a real plan from actual experience; never
+auto-suggest by proximity, type, or any heuristic.
+
 ## Local setup
 
 ```bash

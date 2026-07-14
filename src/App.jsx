@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { MapView } from './features/map/MapView'
 import { LocationList } from './features/locations/LocationList'
 import { PhotosView } from './features/photos/PhotosView'
+import { ItinerariesView } from './features/itineraries/ItinerariesView'
 import data from './data/locations.json'
 import { distinctAreas } from './lib/capeRegions'
 import './App.css'
@@ -38,6 +39,13 @@ function App() {
           >
             Photos
           </button>
+          <button
+            type="button"
+            className={view === 'itineraries' ? 'active' : ''}
+            onClick={() => setView('itineraries')}
+          >
+            Itineraries
+          </button>
         </nav>
         <label className="town-filter">
           Town
@@ -55,6 +63,7 @@ function App() {
         {view === 'map' && <MapView town={town} />}
         {view === 'list' && <LocationList town={town} />}
         {view === 'photos' && <PhotosView />}
+        {view === 'itineraries' && <ItinerariesView />}
       </main>
     </div>
   )
