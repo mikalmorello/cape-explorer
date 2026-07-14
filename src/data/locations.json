@@ -430,6 +430,21 @@
       ]
     },
     {
+      "id": "scargo-beach",
+      "name": "Scargo Beach",
+      "type": "beach",
+      "area": "Dennis",
+      "lat": 41.7425,
+      "lng": -70.1828,
+      "coordsVerified": false,
+      "activities": [
+        {
+          "title": "Beach",
+          "category": "beach"
+        }
+      ]
+    },
+    {
       "id": "ryan-family-amusements",
       "name": "Ryan Family Amusements",
       "type": "entertainment",
