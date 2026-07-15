@@ -51,12 +51,33 @@ async function fetchTowns() {
   const gj = await fetchJson(`${TIGERWEB_SERVICE}/${layer.id}/query?${params}`)
   if (!gj.features?.length) throw new Error('TIGERweb query returned no features')
 
+  // Census names carry legal-form suffixes some MA municipalities
+  // have ("Barnstable Town city" - Barnstable is legally a city named
+  // "Town"). Try raw names first, then with town/city suffixes
+  // stripped, until one matches our municipality list.
+  const normalize = (f) => {
+    const raw = [f.properties.BASENAME, f.properties.NAME].filter(Boolean)
+    const candidates = raw.flatMap((n) => {
+      const out = [n]
+      let s = n
+      for (let i = 0; i < 2; i++) {
+        s = s.replace(/ (town|city)$/i, '')
+        out.push(s)
+      }
+      return out
+    })
+    return candidates.find((n) => MUNICIPALITY_TO_REGION[n])
+  }
+
   const features = gj.features
     .map((f) => {
-      const name = f.properties.BASENAME ?? f.properties.NAME?.replace(/ town$/i, '')
-      const region = MUNICIPALITY_TO_REGION[name]
-      return region
-        ? { type: 'Feature', properties: { name, region }, geometry: f.geometry }
+      const name = normalize(f)
+      return name
+        ? {
+            type: 'Feature',
+            properties: { name, region: MUNICIPALITY_TO_REGION[name] },
+            geometry: f.geometry,
+          }
         : null
     })
     .filter(Boolean)
