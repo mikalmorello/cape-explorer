@@ -2,7 +2,7 @@
 // polygons come in - distinct from locations' `area` values, which use
 // village names ("West Dennis", "Hyannis"). This maps each
 // municipality to its Cape region for fill coloring, and is shared by
-// scripts/fetch-map-data.mjs (tagging fetched boundary features) and
+// scripts/generate-towns.mjs (tagging fetched boundary features) and
 // the map style (colors, island offsets).
 export const MUNICIPALITY_TO_REGION = {
   Bourne: 'Upper Cape',

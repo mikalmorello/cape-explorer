@@ -6,30 +6,18 @@ TBD - created by archiving change add-initial-scaffold. Update Purpose after arc
 ### Requirement: App auto-deploys to GitHub Pages on push to main
 The repository SHALL build and publish the app to GitHub Pages
 automatically whenever commits are pushed to the `main` branch, via a
-GitHub Actions workflow. Before building, the workflow SHALL ensure
-the Cape-region inland-water tile extract is present (restoring it
-from the Actions cache or fetching it via
-`scripts/fetch-map-data.mjs`); a failed fetch with no cached copy
-SHALL fail the build. Town boundary polygons are committed data,
-regenerated on demand by the manually-dispatched `generate-towns`
-workflow. No map-provider API
-key is used at build time.
+GitHub Actions workflow. Both town boundary polygons
+(`src/data/capeTowns.json`) and inland water polygons
+(`src/data/capeWater.json`) are committed data, each regenerated on
+demand by its own manually-dispatched workflow (`generate-towns`,
+`generate-water`) rather than fetched at deploy time. No map-provider
+API key is used at build time.
 
 #### Scenario: Push to main triggers a deploy
 - **WHEN** a commit is pushed to `main`
-- **THEN** a GitHub Actions workflow restores or fetches the map
-  data, builds the app, and publishes the build output to GitHub
-  Pages without manual intervention
-
-#### Scenario: Map data is cached across deploys
-- **WHEN** a deploy runs and previously fetched map data is in the
-  Actions cache
-- **THEN** the workflow reuses it without re-downloading
-
-#### Scenario: Map data fetch fails with no cache
-- **WHEN** the map data fetch fails and no cached copy exists
-- **THEN** the build fails visibly rather than deploying a site with
-  no land or water rendering
+- **THEN** a GitHub Actions workflow builds the app from the
+  committed map data and publishes the build output to GitHub Pages
+  without manual intervention
 
 ### Requirement: Site is reachable at the project's GitHub Pages URL
 The deployed app SHALL be reachable at

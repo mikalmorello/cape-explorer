@@ -9,9 +9,12 @@ context: |
 
   ## Stack (decided)
   - Frontend: React + Vite, JavaScript (no TypeScript)
-  - Map: MapLibre GL (via react-map-gl) with self-hosted data - town
-    boundary GeoJSON (US Census TIGERweb) + a Cape-only Protomaps
-    PMTiles extract, both fetched at deploy time. No map API keys.
+  - Map: MapLibre GL (via react-map-gl) with self-hosted, committed data
+    - shoreline-clipped town boundary GeoJSON (US Census cartographic
+    boundary series) and inland water GeoJSON (OSM natural=water,
+    intersected against the town-land union so it can't extend past
+    the coastline), each regenerated on demand by its own manual
+    workflow. No map API keys.
   - Backend/DB/Auth/Storage: none - fully static, no backend, no user
     accounts. Data lives in src/data/locations.json, committed to the repo.
   - Photos: no Photos API/backend - a build-time script scrapes cover
