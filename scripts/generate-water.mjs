@@ -83,14 +83,15 @@ async function main() {
       continue // degenerate/self-intersecting OSM geometry - skip rather than fail the whole run
     }
     if (result) {
-      clipped.push({
-        type: 'Feature',
-        properties: { name: water.properties?.name ?? null },
-        geometry: result.geometry,
-      })
+      clipped.push({ type: 'Feature', properties: {}, geometry: result.geometry })
     }
   }
   if (clipped.length === 0) throw new Error('No inland water survived intersection with land - check the query/bbox')
+
+  // Round coordinates to 5 decimals (~1m) to keep the committed file small,
+  // same as capeTowns.json.
+  const round = (c) => (typeof c === 'number' ? Math.round(c * 1e5) / 1e5 : c.map(round))
+  for (const f of clipped) f.geometry.coordinates = round(f.geometry.coordinates)
 
   console.log(`${clipped.length} water polygons clipped to land.`)
   writeFileSync(WATER_PATH, JSON.stringify({ type: 'FeatureCollection', features: clipped }))

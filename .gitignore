@@ -22,7 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Deploy-time map data (fetched by scripts/fetch-map-data.mjs, cached in CI)
-public/data/
-public/tiles/
