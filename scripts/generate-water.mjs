@@ -55,6 +55,7 @@ async function fetchOsmWater(bbox) {
 async function main() {
   const { union } = await import('@turf/union')
   const { intersect } = await import('@turf/intersect')
+  const { simplify } = await import('@turf/simplify')
   const { featureCollection } = await import('@turf/helpers')
   const osmtogeojson = (await import('osmtogeojson')).default
 
@@ -88,13 +89,15 @@ async function main() {
   }
   if (clipped.length === 0) throw new Error('No inland water survived intersection with land - check the query/bbox')
 
-  // Round coordinates to 5 decimals (~1m) to keep the committed file small,
-  // same as capeTowns.json.
+  // Simplify (the owner asked for water "simplified", and raw OSM
+  // coastline/pond detail is far finer than this map needs) and round
+  // coordinates to 5 decimals (~1m) to keep the committed file small.
+  const simplified = clipped.map((f) => simplify(f, { tolerance: 0.0001, highQuality: true }))
   const round = (c) => (typeof c === 'number' ? Math.round(c * 1e5) / 1e5 : c.map(round))
-  for (const f of clipped) f.geometry.coordinates = round(f.geometry.coordinates)
+  for (const f of simplified) f.geometry.coordinates = round(f.geometry.coordinates)
 
-  console.log(`${clipped.length} water polygons clipped to land.`)
-  writeFileSync(WATER_PATH, JSON.stringify({ type: 'FeatureCollection', features: clipped }))
+  console.log(`${simplified.length} water polygons clipped to land.`)
+  writeFileSync(WATER_PATH, JSON.stringify({ type: 'FeatureCollection', features: simplified }))
   console.log(`Wrote ${WATER_PATH}`)
 }
 
