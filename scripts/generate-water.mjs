@@ -38,9 +38,17 @@ async function fetchOsmWater(bbox) {
   const res = await fetch('https://overpass-api.de/api/interpreter', {
     method: 'POST',
     body: `data=${encodeURIComponent(query)}`,
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      // Overpass's usage policy rejects requests with no identifying
+      // User-Agent (some default fetch UAs get a 406).
+      'User-Agent': 'cape-explorer-map-data (github.com/mikalmorello/cape-explorer)',
+    },
   })
-  if (!res.ok) throw new Error(`Overpass request failed: HTTP ${res.status}`)
+  if (!res.ok) {
+    const body = await res.text().catch(() => '')
+    throw new Error(`Overpass request failed: HTTP ${res.status} ${body.slice(0, 500)}`)
+  }
   return res.json()
 }
 

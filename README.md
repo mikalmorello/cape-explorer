@@ -158,13 +158,13 @@ The map is MapLibre GL rendering two self-hosted artifacts:
   Rendered as region-colored fills with white outlines; colors and
   the municipality→region mapping live in
   `src/lib/capeMunicipalities.js`.
-- `public/tiles/cape.pmtiles` — a Protomaps vector-tile extract
-  clipped to the Cape, fetched at deploy time by
-  `scripts/fetch-map-data.mjs` (cached via `actions/cache`; a failed
-  fetch with no cache fails the build). Used only for simplified
-  inland water (ponds, lakes, rivers). The ocean is a CSS wave
-  pattern, and the mainland is simply never drawn — only the Cape
-  renders.
+- `src/data/capeWater.json` (committed) — OSM `natural=water` polygons
+  (ponds, lakes, the Cape Cod Canal) intersected against the union of
+  the Cape town polygons, so water geometry can never extend past the
+  real coastline. Regenerate on demand with the `generate-water`
+  workflow (manual dispatch). Used only for simplified inland water;
+  the ocean is a CSS wave pattern, and the mainland is simply never
+  drawn — only the Cape renders.
 
 Martha's Vineyard and Nantucket are **hidden for now** (until the
 base map is settled). Their polygons stay in the data — re-enabling
@@ -172,9 +172,9 @@ means dropping the `capeOnly` filter in `MapView` and restoring the
 `REGION_DISPLAY_OFFSET` inset shift; `locations.json` always keeps
 true coordinates either way.
 
-Locally, `npm run dev` shows land + pins + ocean out of the box (town
-data is committed); inland water appears after `npm run fetch-tiles`
-(needs open network access).
+Locally, `npm run dev` shows the full map (land, inland water, pins,
+ocean) out of the box — both `capeTowns.json` and `capeWater.json`
+are committed data, no fetch step needed.
 
 The previous Google Maps implementation is preserved on the
 `backup/google-maps-map` branch.
