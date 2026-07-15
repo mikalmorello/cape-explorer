@@ -118,13 +118,19 @@ async function fetchTiles(townFeatures) {
     chmodSync(bin, 0o755)
   }
 
-  const builds = await fetchJson('https://build.protomaps.com/builds.json')
-  const keys = builds
-    .map((b) => (typeof b === 'string' ? b : b.key))
-    .filter((k) => k?.endsWith('.pmtiles'))
-    .sort()
-  if (!keys.length) throw new Error('No Protomaps builds found in builds.json')
-  const latest = keys[keys.length - 1]
+  // Builds are daily files named YYYYMMDD.pmtiles with no stable index
+  // endpoint - probe from today backwards until one exists.
+  let latest = null
+  for (let daysBack = 0; daysBack <= 10 && !latest; daysBack++) {
+    const d = new Date(Date.now() - daysBack * 86400000)
+    const key = `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, '0')}${String(d.getUTCDate()).padStart(2, '0')}.pmtiles`
+    const res = await fetch(`https://build.protomaps.com/${key}`, {
+      headers: { Range: 'bytes=0-0' },
+    })
+    if (res.ok || res.status === 206) latest = key
+    res.body?.cancel?.()
+  }
+  if (!latest) throw new Error('No Protomaps daily build found in the last 10 days')
 
   mkdirSync('public/tiles', { recursive: true })
   console.log(`Extracting Cape region from ${latest} (maxzoom 13)...`)
