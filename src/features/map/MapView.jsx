@@ -1,26 +1,45 @@
-import { useState } from 'react'
-import { APIProvider, Map, Marker, InfoWindow } from '@vis.gl/react-google-maps'
+import { useEffect, useMemo, useState } from 'react'
+import Map, { Marker, Popup } from 'react-map-gl/maplibre'
+import maplibregl from 'maplibre-gl'
+import { Protocol } from 'pmtiles'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import data from '../../data/locations.json'
+import { regionForArea } from '../../lib/capeRegions'
+import { REGION_DISPLAY_OFFSET } from '../../lib/capeMunicipalities'
+import { buildMapStyle, EMPTY_TOWNS, FRAME_BOUNDS, PAN_BOUNDS } from './mapStyle'
 
-const CAPE_COD_CENTER = { lat: 41.7003, lng: -70.3002 }
+maplibregl.addProtocol('pmtiles', new Protocol().tile)
 
-// Keep the map focused on our own pins - hide Google's default
-// points-of-interest and transit layers so they don't compete visually.
-const MAP_STYLES = [
-  { featureType: 'poi', stylers: [{ visibility: 'off' }] },
-  { featureType: 'transit', stylers: [{ visibility: 'off' }] },
-]
+// Display-only position: locations.json stores true coordinates, but
+// island locations render shifted by the same offset as their island's
+// land so pins stay glued to the inset landmass.
+function displayLngLat(location) {
+  const offset = REGION_DISPLAY_OFFSET[regionForArea(location.area)]
+  return offset
+    ? [location.lng + offset[0], location.lat + offset[1]]
+    : [location.lng, location.lat]
+}
 
-function MissingApiKeyNotice() {
-  return (
-    <div className="map-notice">
-      <p>
-        The map can't render without a Google Maps API key. Add
-        <code> VITE_GOOGLE_MAPS_API_KEY</code> to <code>.env.local</code>
-        (see <code>.env.example</code> and the README).
-      </p>
-    </div>
-  )
+function shiftIslandTowns(geojson) {
+  const shiftCoords = (coords, [dLng, dLat]) =>
+    typeof coords[0] === 'number'
+      ? [coords[0] + dLng, coords[1] + dLat]
+      : coords.map((c) => shiftCoords(c, [dLng, dLat]))
+
+  return {
+    ...geojson,
+    features: geojson.features.map((feature) => {
+      const offset = REGION_DISPLAY_OFFSET[feature.properties.region]
+      if (!offset) return feature
+      return {
+        ...feature,
+        geometry: {
+          ...feature.geometry,
+          coordinates: shiftCoords(feature.geometry.coordinates, offset),
+        },
+      }
+    }),
+  }
 }
 
 function LocationPopup({ location }) {
@@ -65,46 +84,72 @@ function LocationPopup({ location }) {
 }
 
 export function MapView({ town = 'all' }) {
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
   const [selectedId, setSelectedId] = useState(null)
+  const [towns, setTowns] = useState(EMPTY_TOWNS)
 
-  if (!apiKey) {
-    return <MissingApiKeyNotice />
-  }
+  useEffect(() => {
+    let cancelled = false
+    fetch(`${import.meta.env.BASE_URL}data/cape-towns.json`)
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
+      .then((geojson) => {
+        if (!cancelled) setTowns(shiftIslandTowns(geojson))
+      })
+      .catch((err) => console.warn('Town boundaries unavailable:', err.message))
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const mapStyle = useMemo(() => buildMapStyle(towns), [towns])
 
   const locations =
     town === 'all' ? data.locations : data.locations.filter((loc) => loc.area === town)
   const selected = locations.find((loc) => loc.id === selectedId)
 
   return (
-    <APIProvider apiKey={apiKey}>
+    <div className="map-view">
       <Map
-        className="map-view"
-        defaultCenter={CAPE_COD_CENTER}
-        defaultZoom={10}
-        gestureHandling="greedy"
-        disableDefaultUI={false}
-        styles={MAP_STYLES}
+        initialViewState={{ bounds: FRAME_BOUNDS, fitBoundsOptions: { padding: 30 } }}
+        maxBounds={PAN_BOUNDS}
+        minZoom={7}
+        maxZoom={16}
+        mapStyle={mapStyle}
         onClick={() => setSelectedId(null)}
+        onError={(e) => {
+          // Missing local tiles (dev without fetch-tiles) is expected;
+          // the map still renders towns, waves, and pins.
+          if (!String(e.error?.message ?? '').includes('cape.pmtiles')) console.error(e.error)
+        }}
+        style={{ width: '100%', height: '100%' }}
       >
-        {locations.map((location) => (
-          <Marker
-            key={location.id}
-            position={{ lat: location.lat, lng: location.lng }}
-            title={location.name}
-            onClick={() => setSelectedId(location.id)}
-          />
-        ))}
+        {locations.map((location) => {
+          const [lng, lat] = displayLngLat(location)
+          return (
+            <Marker
+              key={location.id}
+              longitude={lng}
+              latitude={lat}
+              color="#2b6157"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation()
+                setSelectedId(location.id)
+              }}
+            />
+          )
+        })}
         {selected && (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            pixelOffset={[0, -36]}
-            onCloseClick={() => setSelectedId(null)}
+          <Popup
+            longitude={displayLngLat(selected)[0]}
+            latitude={displayLngLat(selected)[1]}
+            anchor="bottom"
+            offset={36}
+            closeOnClick={false}
+            onClose={() => setSelectedId(null)}
           >
             <LocationPopup location={selected} />
-          </InfoWindow>
+          </Popup>
         )}
       </Map>
-    </APIProvider>
+    </div>
   )
 }

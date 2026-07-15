@@ -14,9 +14,10 @@
   run and report issues to the user directly in chat** — don't rely on
   them noticing in the Actions UI or the job summary. Pull the job
   logs (`get_job_logs`) or job summary for the `fetch-photos` step and
-  flag any `WARN`/failed fetches, and confirm the run's conclusion is
-  `success`. If something failed, say so plainly rather than just
-  reporting deploy success.
+  flag any `WARN`/failed fetches, check the map-data fetch step
+  (`scripts/fetch-map-data.mjs` — this one fails the build on error),
+  and confirm the run's conclusion is `success`. If something failed,
+  say so plainly rather than just reporting deploy success.
 
 ## OpenSpec
 

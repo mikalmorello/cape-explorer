@@ -67,15 +67,15 @@
 .map-view {
   width: 100%;
   height: 100%;
+  /* Decorative ocean: repeating wave scallops behind the transparent
+     map canvas - the "sea" the landmass floats on. */
+  background-color: #c3e0ec;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48' viewBox='0 0 96 48'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.45' stroke-width='2'%3E%3Cpath d='M0 12 q12 -10 24 0 t24 0 t24 0 t24 0'/%3E%3Cpath d='M-12 36 q12 -10 24 0 t24 0 t24 0 t24 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 96px 48px;
 }
 
-.map-notice {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  text-align: center;
+.map-view .maplibregl-map {
+  background: transparent;
 }
 
 .location-popup {

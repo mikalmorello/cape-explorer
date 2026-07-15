@@ -9,7 +9,9 @@ context: |
 
   ## Stack (decided)
   - Frontend: React + Vite, JavaScript (no TypeScript)
-  - Map: Google Maps JS API (via @vis.gl/react-google-maps)
+  - Map: MapLibre GL (via react-map-gl) with self-hosted data - town
+    boundary GeoJSON (US Census TIGERweb) + a Cape-only Protomaps
+    PMTiles extract, both fetched at deploy time. No map API keys.
   - Backend/DB/Auth/Storage: none - fully static, no backend, no user
     accounts. Data lives in src/data/locations.json, committed to the repo.
   - Photos: no Photos API/backend - a build-time script scrapes cover
@@ -38,7 +40,7 @@ context: |
   - Native mobile app
   - Multi-tenant SaaS / billing / user accounts
   - Real-time collaborative editing
-  - Any backend or paid API surface beyond the Google Maps JS API free tier
+  - Any backend or paid API surface at all (the map is fully self-hosted)
 
   ## Future design references
   Not actionable yet - just inspiration to revisit whenever we do a

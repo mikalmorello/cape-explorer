@@ -1,17 +1,9 @@
-# map-view Specification
-
-## Purpose
-Renders the interactive map that is the primary way of browsing the
-app's locations: an isolated, illustrated-leaning Cape Cod + islands
-composition built entirely from self-hosted data, free of any
-map-provider API keys or base-map clutter.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Cape Cod-centered map renders on load
 The app SHALL render an interactive MapLibre GL map when the app
 loads, showing only Cape Cod and the islands: land is drawn from the
-bundled town-boundary data (no mainland, no world basemap), the
+committed town-boundary data (no mainland, no world basemap), the
 ocean is a decorative wave-patterned background, and the initial view
 fits the whole composition (Cape plus the inset islands). No API key
 or external map service is required.
@@ -24,8 +16,9 @@ or external map service is required.
 
 #### Scenario: Tile file unavailable
 - **WHEN** the inland-water tile file is missing or unreachable
-- **THEN** the town polygons, ocean waves, and all pins still render -
-  the map remains usable, only inland-water detail is absent
+- **THEN** the town polygons, ocean waves, and all pins still render
+  from committed data - the map remains usable, only inland-water
+  detail is absent
 
 ### Requirement: Towns are outlined and colored by Cape region
 The map SHALL render each Cape town, Martha's Vineyard town, and

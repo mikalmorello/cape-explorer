@@ -6,18 +6,27 @@ TBD - created by archiving change add-initial-scaffold. Update Purpose after arc
 ### Requirement: App auto-deploys to GitHub Pages on push to main
 The repository SHALL build and publish the app to GitHub Pages
 automatically whenever commits are pushed to the `main` branch, via a
-GitHub Actions workflow.
+GitHub Actions workflow. Before building, the workflow SHALL ensure
+the Cape-region map data is present (restoring it from the Actions
+cache or fetching it via `scripts/fetch-map-data.mjs`); a failed
+fetch with no cached copy SHALL fail the build. No map-provider API
+key is used at build time.
 
 #### Scenario: Push to main triggers a deploy
 - **WHEN** a commit is pushed to `main`
-- **THEN** a GitHub Actions workflow builds the app and publishes the
-  build output to GitHub Pages without manual intervention
+- **THEN** a GitHub Actions workflow restores or fetches the map
+  data, builds the app, and publishes the build output to GitHub
+  Pages without manual intervention
 
-#### Scenario: Google Maps key is supplied via repository secret
-- **WHEN** the deploy workflow builds the app
-- **THEN** it reads the Google Maps API key from a `GOOGLE_MAPS_API_KEY`
-  repository secret and injects it as `VITE_GOOGLE_MAPS_API_KEY` at build
-  time, rather than the key being hardcoded in the repo
+#### Scenario: Map data is cached across deploys
+- **WHEN** a deploy runs and previously fetched map data is in the
+  Actions cache
+- **THEN** the workflow reuses it without re-downloading
+
+#### Scenario: Map data fetch fails with no cache
+- **WHEN** the map data fetch fails and no cached copy exists
+- **THEN** the build fails visibly rather than deploying a site with
+  no land or water rendering
 
 ### Requirement: Site is reachable at the project's GitHub Pages URL
 The deployed app SHALL be reachable at

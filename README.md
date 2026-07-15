@@ -8,7 +8,8 @@ Live site: https://mikalmorello.github.io/cape-explorer/
 ## Stack
 
 - React + Vite (JavaScript)
-- Google Maps JS API (via `@vis.gl/react-google-maps`)
+- MapLibre GL (via `react-map-gl`) with self-hosted map data — no API
+  keys, no map-provider accounts
 - Deployed to GitHub Pages on every push to `main`
 
 See `openspec/config.yaml` and `openspec/changes/` for the plan and
@@ -140,20 +141,37 @@ auto-suggest by proximity, type, or any heuristic.
 
 ```bash
 npm install
-cp .env.example .env.local
-# edit .env.local and add your Google Maps API key
 npm run dev
 ```
 
-### Google Maps API key
+No API keys or env vars needed.
 
-The map needs a Google Maps JavaScript API key:
+### Map data
 
-1. Create/select a project in the [Google Cloud Console](https://console.cloud.google.com/).
-2. Enable the "Maps JavaScript API".
-3. Create an API key and restrict it to your local/deploy origins.
-4. Put it in `.env.local` as `VITE_GOOGLE_MAPS_API_KEY`.
+The map is MapLibre GL rendering two self-hosted artifacts, both
+produced at deploy time by `scripts/fetch-map-data.mjs` (cached across
+deploys via `actions/cache`; a failed fetch with no cache fails the
+build — the map is core):
 
-Without a key, the app still runs but shows a message in place of the
-map. The deployed site gets its key from the `GOOGLE_MAPS_API_KEY`
-GitHub Actions secret at build time.
+- `public/data/cape-towns.json` — town boundary polygons (US Census
+  TIGERweb) for the 15 Cape towns plus Martha's Vineyard towns and
+  Nantucket, tagged with their Cape region. Rendered as
+  region-colored fills with white outlines; the region colors,
+  municipality→region mapping, and island display offsets live in
+  `src/lib/capeMunicipalities.js`.
+- `public/tiles/cape.pmtiles` — a Protomaps vector-tile extract
+  clipped to the Cape, used only for simplified inland water (ponds,
+  lakes, rivers). The ocean is a CSS wave pattern, and the mainland is
+  simply never drawn — only the Cape + islands render.
+
+The islands are displayed **inset** (shifted toward the Cape so
+everything fits one frame). `locations.json` always stores true
+coordinates; the shift is applied at render time only, from
+`REGION_DISPLAY_OFFSET`, to both island land and island pins.
+
+Locally, `npm run dev` works without the fetched data (pins + ocean
+render; land/water appear once data exists). To fetch the real data
+locally run `npm run fetch-tiles` (needs open network access).
+
+The previous Google Maps implementation is preserved on the
+`backup/google-maps-map` branch.
