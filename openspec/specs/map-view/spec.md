@@ -23,17 +23,13 @@ is required.
   coastline shape, pannable and zoomable within restricted bounds,
   with no mainland visible and no map-provider API key involved
 
-#### Scenario: Tile file unavailable
-- **WHEN** the inland-water tile file is missing or unreachable
-- **THEN** the town polygons, ocean waves, and all pins still render -
-  the map remains usable, only inland-water detail is absent
-
 ### Requirement: Towns are outlined and colored by Cape region
 The map SHALL render each Cape town as a shoreline-clipped polygon
 with a visible outline, filled with a color determined by its region
 (Upper Cape, Mid Cape, Lower Cape, Outer Cape). Inland water bodies
-SHALL render simplified above the town fills; the ocean SHALL NOT be
-rendered from map data.
+SHALL render simplified above the town fills, geometrically clipped to
+the town land so no water can extend past the real coastline; the
+ocean SHALL NOT be rendered from map data.
 
 #### Scenario: Region coloring
 - **WHEN** the map renders
