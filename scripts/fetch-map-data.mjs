@@ -58,12 +58,16 @@ async function fetchTiles() {
   if (!latest) throw new Error('No Protomaps daily build found in the last 10 days')
 
   mkdirSync('public/tiles', { recursive: true })
-  console.log(`Extracting Cape region from ${latest} (maxzoom 13)...`)
+  // minzoom 10: low-zoom tiles are huge (one covers most of New
+  // England), so including them drags in mainland water that renders
+  // floating in the ocean. Inland water only draws when zoomed in.
+  console.log(`Extracting Cape region from ${latest} (z10-13)...`)
   execFileSync(bin, [
     'extract',
     `https://build.protomaps.com/${latest}`,
     TILES_PATH,
     '--region=/tmp/cape-region.geojson',
+    '--minzoom=10',
     '--maxzoom=13',
   ])
   rmSync('/tmp/cape-region.geojson', { force: true })

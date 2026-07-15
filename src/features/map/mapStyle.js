@@ -15,8 +15,8 @@ export const FRAME_BOUNDS = [
   [-69.87, 42.1],
 ]
 export const PAN_BOUNDS = [
-  [-71.0, 41.3],
-  [-69.6, 42.25],
+  [-70.85, 41.4],
+  [-69.75, 42.18],
 ]
 
 const regionColorMatch = [
@@ -54,6 +54,10 @@ export function buildMapStyle(townsGeojson) {
         type: 'fill',
         source: 'cape',
         'source-layer': 'water',
+        // Tile extract starts at z10 (see fetch-map-data.mjs), so
+        // ponds/rivers fade in once zoomed into a town - the overview
+        // stays clean flat color.
+        minzoom: 10,
         filter: ['!=', ['get', 'kind'], 'ocean'],
         paint: { 'fill-color': '#a9d7e8' },
       },
