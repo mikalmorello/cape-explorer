@@ -1,0 +1,30 @@
+name: Generate town boundaries
+
+# Manual one-shot: fetches Census shoreline-clipped town boundaries,
+# regenerates src/data/capeTowns.json, and commits it back to the
+# branch this was dispatched on. Not part of the deploy pipeline.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/generate-towns.mjs
+      - name: Commit regenerated boundaries
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/capeTowns.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Regenerate capeTowns.json from Census cartographic boundaries"
+          git push
