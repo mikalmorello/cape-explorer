@@ -8,14 +8,15 @@ import { REGION_COLORS } from '../../lib/capeMunicipalities'
 
 export const EMPTY_TOWNS = { type: 'FeatureCollection', features: [] }
 
-// Frame around the Cape + inset islands (post-offset positions).
+// Frame around the Cape (islands hidden for now - widen these again
+// when Martha's Vineyard/Nantucket return).
 export const FRAME_BOUNDS = [
-  [-70.82, 41.3],
-  [-69.86, 42.1],
+  [-70.72, 41.5],
+  [-69.87, 42.1],
 ]
 export const PAN_BOUNDS = [
-  [-71.1, 41.1],
-  [-69.55, 42.3],
+  [-71.0, 41.3],
+  [-69.6, 42.25],
 ]
 
 const regionColorMatch = [

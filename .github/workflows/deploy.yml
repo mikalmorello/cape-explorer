@@ -33,14 +33,12 @@ jobs:
             photo-harvest-
       - name: Fetch photos from shared albums
         run: node scripts/fetch-photos.mjs
-      - name: Restore map data cache
+      - name: Restore tile cache
         uses: actions/cache@v4
         with:
-          path: |
-            public/data
-            public/tiles
-          key: map-data-${{ hashFiles('scripts/fetch-map-data.mjs', 'src/lib/capeMunicipalities.js') }}
-      - name: Fetch map data (town boundaries + tile extract)
+          path: public/tiles
+          key: map-tiles-${{ hashFiles('scripts/fetch-map-data.mjs', 'src/data/capeTowns.json') }}
+      - name: Fetch inland-water tile extract
         run: node scripts/fetch-map-data.mjs
       - run: npm run build
       - uses: actions/configure-pages@v5

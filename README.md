@@ -148,30 +148,33 @@ No API keys or env vars needed.
 
 ### Map data
 
-The map is MapLibre GL rendering two self-hosted artifacts, both
-produced at deploy time by `scripts/fetch-map-data.mjs` (cached across
-deploys via `actions/cache`; a failed fetch with no cache fails the
-build — the map is core):
+The map is MapLibre GL rendering two self-hosted artifacts:
 
-- `public/data/cape-towns.json` — town boundary polygons (US Census
-  TIGERweb) for the 15 Cape towns plus Martha's Vineyard towns and
-  Nantucket, tagged with their Cape region. Rendered as
-  region-colored fills with white outlines; the region colors,
-  municipality→region mapping, and island display offsets live in
+- `src/data/capeTowns.json` (committed) — shoreline-clipped town
+  boundary polygons (US Census cartographic boundary series, the real
+  Cape Cod outline) for the 15 Cape towns plus Martha's Vineyard
+  towns and Nantucket, tagged with their Cape region. Regenerate on
+  demand with the `generate-towns` workflow (manual dispatch).
+  Rendered as region-colored fills with white outlines; colors and
+  the municipality→region mapping live in
   `src/lib/capeMunicipalities.js`.
 - `public/tiles/cape.pmtiles` — a Protomaps vector-tile extract
-  clipped to the Cape, used only for simplified inland water (ponds,
-  lakes, rivers). The ocean is a CSS wave pattern, and the mainland is
-  simply never drawn — only the Cape + islands render.
+  clipped to the Cape, fetched at deploy time by
+  `scripts/fetch-map-data.mjs` (cached via `actions/cache`; a failed
+  fetch with no cache fails the build). Used only for simplified
+  inland water (ponds, lakes, rivers). The ocean is a CSS wave
+  pattern, and the mainland is simply never drawn — only the Cape
+  renders.
 
-The islands are displayed **inset** (shifted toward the Cape so
-everything fits one frame). `locations.json` always stores true
-coordinates; the shift is applied at render time only, from
-`REGION_DISPLAY_OFFSET`, to both island land and island pins.
+Martha's Vineyard and Nantucket are **hidden for now** (until the
+base map is settled). Their polygons stay in the data — re-enabling
+means dropping the `capeOnly` filter in `MapView` and restoring the
+`REGION_DISPLAY_OFFSET` inset shift; `locations.json` always keeps
+true coordinates either way.
 
-Locally, `npm run dev` works without the fetched data (pins + ocean
-render; land/water appear once data exists). To fetch the real data
-locally run `npm run fetch-tiles` (needs open network access).
+Locally, `npm run dev` shows land + pins + ocean out of the box (town
+data is committed); inland water appears after `npm run fetch-tiles`
+(needs open network access).
 
 The previous Google Maps implementation is preserved on the
 `backup/google-maps-map` branch.

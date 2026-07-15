@@ -10,17 +10,18 @@ map-provider API keys or base-map clutter.
 
 ### Requirement: Cape Cod-centered map renders on load
 The app SHALL render an interactive MapLibre GL map when the app
-loads, showing only Cape Cod and the islands: land is drawn from the
-bundled town-boundary data (no mainland, no world basemap), the
-ocean is a decorative wave-patterned background, and the initial view
-fits the whole composition (Cape plus the inset islands). No API key
-or external map service is required.
+loads, showing only Cape Cod: land is drawn from committed
+shoreline-clipped town-boundary data (US Census cartographic
+boundary series - the real Cape Cod outline; no mainland, no world
+basemap), the ocean is a decorative wave-patterned background, and
+the initial view fits the Cape. No API key or external map service
+is required.
 
 #### Scenario: App loads
 - **WHEN** a user opens the app
-- **THEN** an interactive map renders showing the Cape and islands
-  composition, pannable and zoomable within restricted bounds, with
-  no mainland visible and no map-provider API key involved
+- **THEN** an interactive map renders showing the Cape's real
+  coastline shape, pannable and zoomable within restricted bounds,
+  with no mainland visible and no map-provider API key involved
 
 #### Scenario: Tile file unavailable
 - **WHEN** the inland-water tile file is missing or unreachable
@@ -28,12 +29,11 @@ or external map service is required.
   the map remains usable, only inland-water detail is absent
 
 ### Requirement: Towns are outlined and colored by Cape region
-The map SHALL render each Cape town, Martha's Vineyard town, and
-Nantucket as a polygon with a visible outline, filled with a color
-determined by its region (Upper Cape, Mid Cape, Lower Cape, Outer
-Cape, Martha's Vineyard, Nantucket). Inland water bodies SHALL render
-simplified above the town fills; the ocean SHALL NOT be rendered from
-map data.
+The map SHALL render each Cape town as a shoreline-clipped polygon
+with a visible outline, filled with a color determined by its region
+(Upper Cape, Mid Cape, Lower Cape, Outer Cape). Inland water bodies
+SHALL render simplified above the town fills; the ocean SHALL NOT be
+rendered from map data.
 
 #### Scenario: Region coloring
 - **WHEN** the map renders
@@ -45,17 +45,18 @@ map data.
 - **THEN** ponds, lakes, and rivers on the Cape appear in the water
   color above the region fills, in simplified form
 
-### Requirement: Islands are displayed inset near the Cape
-The map SHALL display Martha's Vineyard and Nantucket translated
-closer to the Cape by fixed display-time offsets so the full
-composition fits one frame. Location data SHALL keep true real-world
-coordinates; the same offset applied to an island's land SHALL be
-applied to pins for locations in that island's towns.
+### Requirement: Islands are deferred until the base map is settled
+Martha's Vineyard and Nantucket SHALL NOT render for now; their
+boundary polygons SHALL remain in the committed town data so they can
+be re-enabled (planned as an inset display shifted toward the Cape
+via `REGION_DISPLAY_OFFSET`, with the same offset applied to island
+pins). Location data SHALL keep true real-world coordinates
+regardless.
 
-#### Scenario: Island pin lands on shifted island
-- **WHEN** a location whose `area` is an island town is rendered
-- **THEN** its marker appears at the correct spot on the shifted
-  island polygon, while its stored lat/lng remain the true values
+#### Scenario: Islands not rendered
+- **WHEN** the map renders
+- **THEN** no Martha's Vineyard or Nantucket polygons appear, while
+  their features remain present in the committed boundary data
 
 ### Requirement: Map displays at least one pin
 The map SHALL display one marker (pin) per location loaded from the

@@ -1,12 +1,13 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl/maplibre'
 import maplibregl from 'maplibre-gl'
 import { Protocol } from 'pmtiles'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import data from '../../data/locations.json'
+import townsData from '../../data/capeTowns.json'
 import { regionForArea } from '../../lib/capeRegions'
 import { REGION_DISPLAY_OFFSET } from '../../lib/capeMunicipalities'
-import { buildMapStyle, EMPTY_TOWNS, FRAME_BOUNDS, PAN_BOUNDS } from './mapStyle'
+import { buildMapStyle, FRAME_BOUNDS, PAN_BOUNDS } from './mapStyle'
 
 maplibregl.addProtocol('pmtiles', new Protocol().tile)
 
@@ -20,25 +21,14 @@ function displayLngLat(location) {
     : [location.lng, location.lat]
 }
 
-function shiftIslandTowns(geojson) {
-  const shiftCoords = (coords, [dLng, dLat]) =>
-    typeof coords[0] === 'number'
-      ? [coords[0] + dLng, coords[1] + dLat]
-      : coords.map((c) => shiftCoords(c, [dLng, dLat]))
-
+// Islands (Martha's Vineyard, Nantucket) are hidden for now per the
+// owner - their polygons stay in capeTowns.json so re-enabling is a
+// matter of dropping this filter (and restoring the inset shift via
+// REGION_DISPLAY_OFFSET).
+function capeOnly(geojson) {
   return {
     ...geojson,
-    features: geojson.features.map((feature) => {
-      const offset = REGION_DISPLAY_OFFSET[feature.properties.region]
-      if (!offset) return feature
-      return {
-        ...feature,
-        geometry: {
-          ...feature.geometry,
-          coordinates: shiftCoords(feature.geometry.coordinates, offset),
-        },
-      }
-    }),
+    features: geojson.features.filter((f) => f.properties.region.endsWith('Cape')),
   }
 }
 
@@ -85,22 +75,8 @@ function LocationPopup({ location }) {
 
 export function MapView({ town = 'all' }) {
   const [selectedId, setSelectedId] = useState(null)
-  const [towns, setTowns] = useState(EMPTY_TOWNS)
 
-  useEffect(() => {
-    let cancelled = false
-    fetch(`${import.meta.env.BASE_URL}data/cape-towns.json`)
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
-      .then((geojson) => {
-        if (!cancelled) setTowns(shiftIslandTowns(geojson))
-      })
-      .catch((err) => console.warn('Town boundaries unavailable:', err.message))
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
-  const mapStyle = useMemo(() => buildMapStyle(towns), [towns])
+  const mapStyle = useMemo(() => buildMapStyle(capeOnly(townsData)), [])
 
   const locations =
     town === 'all' ? data.locations : data.locations.filter((loc) => loc.area === town)

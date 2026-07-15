@@ -7,9 +7,12 @@ TBD - created by archiving change add-initial-scaffold. Update Purpose after arc
 The repository SHALL build and publish the app to GitHub Pages
 automatically whenever commits are pushed to the `main` branch, via a
 GitHub Actions workflow. Before building, the workflow SHALL ensure
-the Cape-region map data is present (restoring it from the Actions
-cache or fetching it via `scripts/fetch-map-data.mjs`); a failed
-fetch with no cached copy SHALL fail the build. No map-provider API
+the Cape-region inland-water tile extract is present (restoring it
+from the Actions cache or fetching it via
+`scripts/fetch-map-data.mjs`); a failed fetch with no cached copy
+SHALL fail the build. Town boundary polygons are committed data,
+regenerated on demand by the manually-dispatched `generate-towns`
+workflow. No map-provider API
 key is used at build time.
 
 #### Scenario: Push to main triggers a deploy
