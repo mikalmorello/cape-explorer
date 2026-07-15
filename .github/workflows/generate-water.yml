@@ -1,0 +1,30 @@
+name: Generate inland water
+
+# Manual one-shot: fetches OSM water polygons, clips them to the
+# committed town land union, and commits src/data/capeWater.json back
+# to the branch this was dispatched on. Not part of the deploy pipeline.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/generate-water.mjs
+      - name: Commit regenerated water data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/capeWater.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Regenerate capeWater.json from OSM water clipped to land"
+          git push

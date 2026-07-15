@@ -1,9 +1,10 @@
 // MapLibre style for the illustrated Cape map: region-colored town
-// fills with white outlines (land comes from the fetched TIGERweb
-// town polygons, passed in already island-shifted), simplified inland
-// water from the Cape PMTiles extract, no labels/roads/POIs. The
-// ocean is deliberately NOT drawn - the canvas stays transparent so
-// the container's CSS wave pattern shows behind the landmass.
+// fills with white outlines (land comes from the committed Census
+// cartographic-boundary town polygons), simplified inland water from
+// OSM water polygons pre-clipped to the land union (so it can never
+// bleed past the coastline), no labels/roads/POIs. The ocean is
+// deliberately NOT drawn - the canvas stays transparent so the
+// container's CSS wave pattern shows behind the landmass.
 import { REGION_COLORS } from '../../lib/capeMunicipalities'
 
 export const EMPTY_TOWNS = { type: 'FeatureCollection', features: [] }
@@ -26,20 +27,19 @@ const regionColorMatch = [
   '#cccccc',
 ]
 
-export function buildMapStyle(townsGeojson) {
-  const base = import.meta.env.BASE_URL
+export function buildMapStyle(townsGeojson, waterGeojson) {
   return {
     version: 8,
     sources: {
       towns: {
         type: 'geojson',
         data: townsGeojson ?? EMPTY_TOWNS,
-        attribution: 'US Census TIGER',
+        attribution: 'US Census',
       },
-      cape: {
-        type: 'vector',
-        url: `pmtiles://${window.location.origin}${base}tiles/cape.pmtiles`,
-        attribution: '© OpenStreetMap contributors, Protomaps',
+      water: {
+        type: 'geojson',
+        data: waterGeojson ?? EMPTY_TOWNS,
+        attribution: '© OpenStreetMap contributors',
       },
     },
     layers: [
@@ -52,13 +52,7 @@ export function buildMapStyle(townsGeojson) {
       {
         id: 'inland-water',
         type: 'fill',
-        source: 'cape',
-        'source-layer': 'water',
-        // Tile extract starts at z10 (see fetch-map-data.mjs), so
-        // ponds/rivers fade in once zoomed into a town - the overview
-        // stays clean flat color.
-        minzoom: 10,
-        filter: ['!=', ['get', 'kind'], 'ocean'],
+        source: 'water',
         paint: { 'fill-color': '#a9d7e8' },
       },
       {

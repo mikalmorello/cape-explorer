@@ -1,15 +1,12 @@
 import { useMemo, useState } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl/maplibre'
-import maplibregl from 'maplibre-gl'
-import { Protocol } from 'pmtiles'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import data from '../../data/locations.json'
 import townsData from '../../data/capeTowns.json'
+import waterData from '../../data/capeWater.json'
 import { regionForArea } from '../../lib/capeRegions'
 import { REGION_DISPLAY_OFFSET } from '../../lib/capeMunicipalities'
 import { buildMapStyle, FRAME_BOUNDS, PAN_BOUNDS } from './mapStyle'
-
-maplibregl.addProtocol('pmtiles', new Protocol().tile)
 
 // Display-only position: locations.json stores true coordinates, but
 // island locations render shifted by the same offset as their island's
@@ -76,7 +73,7 @@ function LocationPopup({ location }) {
 export function MapView({ town = 'all' }) {
   const [selectedId, setSelectedId] = useState(null)
 
-  const mapStyle = useMemo(() => buildMapStyle(capeOnly(townsData)), [])
+  const mapStyle = useMemo(() => buildMapStyle(capeOnly(townsData), waterData), [])
 
   const locations =
     town === 'all' ? data.locations : data.locations.filter((loc) => loc.area === town)
@@ -91,11 +88,6 @@ export function MapView({ town = 'all' }) {
         maxZoom={16}
         mapStyle={mapStyle}
         onClick={() => setSelectedId(null)}
-        onError={(e) => {
-          // Missing local tiles (dev without fetch-tiles) is expected;
-          // the map still renders towns, waves, and pins.
-          if (!String(e.error?.message ?? '').includes('cape.pmtiles')) console.error(e.error)
-        }}
         style={{ width: '100%', height: '100%' }}
       >
         {locations.map((location) => {
