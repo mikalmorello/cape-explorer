@@ -35,16 +35,16 @@ export const MUNICIPALITY_TO_REGION = {
   Nantucket: 'Nantucket',
 }
 
-// Fill color per region - shades of pink (owner-provided palette),
-// darkest at Upper Cape fading to lightest at Outer Cape. Islands
-// reuse two of the shades (they're hidden for now anyway).
+// Fill color per region (owner-provided palette): mauve/plum/petal
+// pink/amethyst smoke across Upper->Outer Cape. Islands reuse two of
+// the shades (they're hidden for now anyway).
 export const REGION_COLORS = {
-  'Upper Cape': '#64113F',
-  'Mid Cape': '#DE4D86',
-  'Lower Cape': '#F29CA3',
-  'Outer Cape': '#F7CACD',
-  "Martha's Vineyard": '#DE4D86',
-  Nantucket: '#F29CA3',
+  'Upper Cape': '#EFABFF',
+  'Mid Cape': '#EDA2F2',
+  'Lower Cape': '#DC6BAD',
+  'Outer Cape': '#8C7AA9',
+  "Martha's Vineyard": '#EDA2F2',
+  Nantucket: '#DC6BAD',
 }
 
 // Display-only translation (degrees [lng, lat]) pulling the islands
