@@ -31,15 +31,38 @@ const regionColorMatch = [
   '#cccccc',
 ]
 
+// One Point feature per town, from the precomputed labelPoint
+// (generate-towns.mjs picks a point guaranteed inside the town's
+// LARGEST polygon part). Labeling from points instead of the town
+// polygons directly avoids MapLibre repeating a name once per part
+// for towns that are a MultiPolygon (e.g. Barnstable + Sandy Neck).
+function labelPointsOf(townsGeojson) {
+  return {
+    type: 'FeatureCollection',
+    features: townsGeojson.features
+      .filter((f) => f.properties.labelPoint)
+      .map((f) => ({
+        type: 'Feature',
+        properties: { name: f.properties.name },
+        geometry: { type: 'Point', coordinates: f.properties.labelPoint },
+      })),
+  }
+}
+
 export function buildMapStyle(townsGeojson) {
+  const towns = townsGeojson ?? EMPTY_TOWNS
   return {
     version: 8,
     glyphs: 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf',
     sources: {
       towns: {
         type: 'geojson',
-        data: townsGeojson ?? EMPTY_TOWNS,
+        data: towns,
         attribution: 'US Census',
+      },
+      'town-labels': {
+        type: 'geojson',
+        data: labelPointsOf(towns),
       },
     },
     layers: [
@@ -61,7 +84,7 @@ export function buildMapStyle(townsGeojson) {
       {
         id: 'town-label',
         type: 'symbol',
-        source: 'towns',
+        source: 'town-labels',
         layout: {
           'text-field': ['get', 'name'],
           'text-font': ['Noto Sans Regular'],

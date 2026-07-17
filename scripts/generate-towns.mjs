@@ -12,12 +12,34 @@ import { execFileSync } from 'node:child_process'
 import { writeFileSync, mkdtempSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
+import area from '@turf/area'
+import pointOnFeature from '@turf/point-on-feature'
+import { polygon } from '@turf/helpers'
 import { MUNICIPALITY_TO_REGION } from '../src/lib/capeMunicipalities.js'
 
 const VINTAGE = '2023'
 const URL = `https://www2.census.gov/geo/tiger/GENZ${VINTAGE}/shp/cb_${VINTAGE}_25_cousub_500k.zip`
 const OUT_PATH = 'src/data/capeTowns.json'
 const COUNTY_FIPS = new Set(['001', '007', '019'])
+
+// A town's polygon can be a MultiPolygon (mainland plus small offshore
+// fragments, e.g. Barnstable's Sandy Neck) - a symbol layer labels
+// every part of a MultiPolygon feature, which repeats the name. So we
+// precompute one guaranteed-inside point on the LARGEST part here and
+// use that (not the polygon geometry) for map labels.
+function labelPointOf(geometry) {
+  const parts = geometry.type === 'MultiPolygon' ? geometry.coordinates : [geometry.coordinates]
+  let largest = parts[0]
+  let largestArea = -1
+  for (const coords of parts) {
+    const a = area(polygon(coords))
+    if (a > largestArea) {
+      largestArea = a
+      largest = coords
+    }
+  }
+  return pointOnFeature(polygon(largest)).geometry.coordinates
+}
 
 const normalize = (raw) => {
   const candidates = [raw]
@@ -48,7 +70,11 @@ for (;;) {
   if (!name) continue
   features.push({
     type: 'Feature',
-    properties: { name, region: MUNICIPALITY_TO_REGION[name] },
+    properties: {
+      name,
+      region: MUNICIPALITY_TO_REGION[name],
+      labelPoint: labelPointOf(value.geometry),
+    },
     geometry: value.geometry,
   })
 }
@@ -62,7 +88,10 @@ if (missing.length) throw new Error(`Missing municipalities: ${missing.join(', '
 // Round coordinates to 5 decimals (~1m) to keep the committed file small.
 const round = (c) =>
   typeof c === 'number' ? Math.round(c * 1e5) / 1e5 : c.map(round)
-for (const f of features) f.geometry.coordinates = round(f.geometry.coordinates)
+for (const f of features) {
+  f.geometry.coordinates = round(f.geometry.coordinates)
+  f.properties.labelPoint = round(f.properties.labelPoint)
+}
 
 writeFileSync(OUT_PATH, JSON.stringify({ type: 'FeatureCollection', features }))
 console.log(`Wrote ${OUT_PATH}: ${features.length} shoreline-clipped municipalities`)
