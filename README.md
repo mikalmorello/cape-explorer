@@ -160,6 +160,12 @@ The map is MapLibre GL rendering a self-hosted artifact:
   `src/lib/capeMunicipalities.js`. Town name labels use the free,
   keyless glyph host `fonts.openmaptiles.org` (no account/API key) -
   the only non-self-hosted runtime dependency the map has.
+- `src/data/capeCoastalHalo.json` (committed) — a thin "shallow
+  water" ring hugging the real coastline (the Cape town-land union,
+  buffered 0.5km and differenced against itself), filled a shade
+  lighter than the flat ocean background. Regenerate with
+  `node scripts/generate-coastal-halo.mjs` (reads only committed
+  data, no network needed) whenever `capeTowns.json` changes.
 
 Inland water is **removed for now**. `src/data/capeWater.json`
 (committed - OSM `natural=water` polygons intersected against the
