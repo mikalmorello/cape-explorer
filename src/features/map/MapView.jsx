@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Map, { Marker, Popup } from 'react-map-gl/maplibre'
+import Map, { Marker } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import data from '../../data/locations.json'
 import townsData from '../../data/capeTowns.json'
@@ -28,9 +28,12 @@ function capeOnly(geojson) {
   }
 }
 
-function LocationPopup({ location }) {
+function LocationPanel({ location, onClose }) {
   return (
-    <div className="location-popup">
+    <div className="location-panel">
+      <button className="location-panel-close" onClick={onClose} aria-label="Close">
+        ×
+      </button>
       <h2>
         {location.name}
         {location.closed && <span className="closed-badge">Closed</span>}
@@ -104,19 +107,8 @@ export function MapView({ town = 'all' }) {
             />
           )
         })}
-        {selected && (
-          <Popup
-            longitude={displayLngLat(selected)[0]}
-            latitude={displayLngLat(selected)[1]}
-            anchor="bottom"
-            offset={36}
-            closeOnClick={false}
-            onClose={() => setSelectedId(null)}
-          >
-            <LocationPopup location={selected} />
-          </Popup>
-        )}
       </Map>
+      {selected && <LocationPanel location={selected} onClose={() => setSelectedId(null)} />}
     </div>
   )
 }
