@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 
 const TOWNS_PATH = 'src/data/capeTowns.json'
 const OUT_PATH = 'src/data/capeCoastalHalo.json'
-const HALO_KM = 0.5
+const HALO_KM = 2.5
 
 async function main() {
   const { union } = await import('@turf/union')

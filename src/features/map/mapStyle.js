@@ -73,12 +73,6 @@ export function buildMapStyle(townsGeojson) {
     },
     layers: [
       {
-        id: 'coastal-halo',
-        type: 'fill',
-        source: 'coastal-halo',
-        paint: { 'fill-color': '#cdeee8' },
-      },
-      {
         id: 'town-fill',
         type: 'fill',
         source: 'towns',
@@ -92,6 +86,17 @@ export function buildMapStyle(townsGeojson) {
           'line-color': '#ffffff',
           'line-width': ['interpolate', ['linear'], ['zoom'], 7, 1, 12, 2.5],
         },
+      },
+      {
+        // Drawn on top of town-outline so it covers the seaward half
+        // of the coastline's white stroke (the halo only exists
+        // outside the land, so it can never touch interior town-to-
+        // town borders) - the coast reads clean while inner borders
+        // stay visible.
+        id: 'coastal-halo',
+        type: 'fill',
+        source: 'coastal-halo',
+        paint: { 'fill-color': '#cdeee8' },
       },
       {
         id: 'town-label',
