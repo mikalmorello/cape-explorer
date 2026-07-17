@@ -35,16 +35,19 @@ export const MUNICIPALITY_TO_REGION = {
   Nantucket: 'Nantucket',
 }
 
-// Fill color per region (owner-provided palette): dragonfruit/petal
-// pink/bright lavender/wisteria blue across Upper->Outer Cape. Islands
-// reuse two of the shades (they're hidden for now anyway).
+// Fill color per region: close variations on one illustrated-map green
+// (owner reference: Coco Lemon Designs' Hawaii island poster), rather
+// than a wide multi-hue gradient. Islands reuse two of the shades
+// (they're hidden for now anyway). The reference's bright accent
+// colors are reserved for future per-location marker designs, not
+// land fill.
 export const REGION_COLORS = {
-  'Upper Cape': '#FF499E',
-  'Mid Cape': '#D264B6',
-  'Lower Cape': '#A480CF',
-  'Outer Cape': '#779BE7',
-  "Martha's Vineyard": '#D264B6',
-  Nantucket: '#A480CF',
+  'Upper Cape': '#6FA884',
+  'Mid Cape': '#7FB88F',
+  'Lower Cape': '#8FC49C',
+  'Outer Cape': '#A0D0AC',
+  "Martha's Vineyard": '#7FB88F',
+  Nantucket: '#8FC49C',
 }
 
 // Display-only translation (degrees [lng, lat]) pulling the islands
