@@ -31,42 +31,56 @@ function capeOnly(geojson) {
 function LocationPanel({ location, onClose }) {
   return (
     <div className="location-panel">
-      <button className="location-panel-close" onClick={onClose} aria-label="Close">
-        ×
-      </button>
-      <h2>
-        {location.name}
-        {location.closed && <span className="closed-badge">Closed</span>}
-      </h2>
-      {location.area && <p className="popup-area">{location.area}</p>}
-      {location.address && <p className="popup-address">{location.address}</p>}
+      <div className="location-panel-header">
+        <h2>
+          {location.name}
+          {location.closed && <span className="closed-badge">Closed</span>}
+        </h2>
+        <button className="location-panel-close" onClick={onClose} aria-label="Close">
+          ×
+        </button>
+      </div>
+      {(location.area || location.address) && (
+        <div className="location-panel-meta">
+          {location.area && <p className="popup-area">{location.area}</p>}
+          {location.address && <p className="popup-address">{location.address}</p>}
+        </div>
+      )}
       {location.activities?.length > 0 && (
-        <ul className="popup-activities">
-          {location.activities.map((activity) => (
-            <li key={activity.title}>
-              {activity.title}
-              {activity.category && (
-                <span className="category-tag">{activity.category}</span>
-              )}
-            </li>
-          ))}
-        </ul>
+        <div className="location-panel-section">
+          <h3 className="location-panel-section-title">
+            Activities ({location.activities.length})
+          </h3>
+          <ul className="popup-activities">
+            {location.activities.map((activity) => (
+              <li key={activity.title}>
+                {activity.title}
+                {activity.category && (
+                  <span className="category-tag">{activity.category}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
-      {location.notes && <p className="popup-notes">{location.notes}</p>}
-      {location.website && (
-        <a href={location.website} target="_blank" rel="noreferrer">
-          Website
-        </a>
+      {location.notes && (
+        <div className="location-panel-section">
+          <p className="popup-notes">{location.notes}</p>
+        </div>
       )}
-      {location.photoAlbum && (
-        <a
-          className="popup-photos-link"
-          href={location.photoAlbum}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Photos
-        </a>
+      {(location.website || location.photoAlbum) && (
+        <div className="location-panel-section location-panel-links">
+          {location.website && (
+            <a href={location.website} target="_blank" rel="noreferrer">
+              Website &rarr;
+            </a>
+          )}
+          {location.photoAlbum && (
+            <a href={location.photoAlbum} target="_blank" rel="noreferrer">
+              Photos &rarr;
+            </a>
+          )}
+        </div>
       )}
     </div>
   )
