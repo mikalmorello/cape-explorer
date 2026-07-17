@@ -1,10 +1,14 @@
 // MapLibre style for the illustrated Cape map: region-colored town
-// fills with white outlines (land comes from the committed Census
-// cartographic-boundary town polygons), simplified inland water from
-// OSM water polygons pre-clipped to the land union (so it can never
-// bleed past the coastline), no labels/roads/POIs. The ocean is
-// deliberately NOT drawn - the canvas stays transparent so the
-// container's CSS wave pattern shows behind the landmass.
+// fills with white outlines and name labels (land comes from the
+// committed Census cartographic-boundary town polygons), no
+// roads/POIs. The ocean is deliberately NOT drawn - the canvas stays
+// transparent so the container's CSS wave pattern shows behind the
+// landmass.
+//
+// Inland water is removed for now (src/data/capeWater.json and the
+// generate-water pipeline that produces it still exist - re-enabling
+// is a matter of adding back a `water` geojson source and an
+// `inland-water` fill layer using it, same as before).
 import { REGION_COLORS } from '../../lib/capeMunicipalities'
 
 export const EMPTY_TOWNS = { type: 'FeatureCollection', features: [] }
@@ -27,19 +31,15 @@ const regionColorMatch = [
   '#cccccc',
 ]
 
-export function buildMapStyle(townsGeojson, waterGeojson) {
+export function buildMapStyle(townsGeojson) {
   return {
     version: 8,
+    glyphs: 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf',
     sources: {
       towns: {
         type: 'geojson',
         data: townsGeojson ?? EMPTY_TOWNS,
         attribution: 'US Census',
-      },
-      water: {
-        type: 'geojson',
-        data: waterGeojson ?? EMPTY_TOWNS,
-        attribution: '© OpenStreetMap contributors',
       },
     },
     layers: [
@@ -50,18 +50,27 @@ export function buildMapStyle(townsGeojson, waterGeojson) {
         paint: { 'fill-color': regionColorMatch },
       },
       {
-        id: 'inland-water',
-        type: 'fill',
-        source: 'water',
-        paint: { 'fill-color': '#a9d7e8' },
-      },
-      {
         id: 'town-outline',
         type: 'line',
         source: 'towns',
         paint: {
           'line-color': '#ffffff',
           'line-width': ['interpolate', ['linear'], ['zoom'], 7, 1, 12, 2.5],
+        },
+      },
+      {
+        id: 'town-label',
+        type: 'symbol',
+        source: 'towns',
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-font': ['Noto Sans Regular'],
+          'text-size': ['interpolate', ['linear'], ['zoom'], 7, 10, 12, 15],
+        },
+        paint: {
+          'text-color': '#2b2b2b',
+          'text-halo-color': '#ffffff',
+          'text-halo-width': 1.2,
         },
       },
     ],

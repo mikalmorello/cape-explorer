@@ -148,23 +148,25 @@ No API keys or env vars needed.
 
 ### Map data
 
-The map is MapLibre GL rendering two self-hosted artifacts:
+The map is MapLibre GL rendering a self-hosted artifact:
 
 - `src/data/capeTowns.json` (committed) — shoreline-clipped town
   boundary polygons (US Census cartographic boundary series, the real
   Cape Cod outline) for the 15 Cape towns plus Martha's Vineyard
   towns and Nantucket, tagged with their Cape region. Regenerate on
   demand with the `generate-towns` workflow (manual dispatch).
-  Rendered as region-colored fills with white outlines; colors and
-  the municipality→region mapping live in
-  `src/lib/capeMunicipalities.js`.
-- `src/data/capeWater.json` (committed) — OSM `natural=water` polygons
-  (ponds, lakes, the Cape Cod Canal) intersected against the union of
-  the Cape town polygons, so water geometry can never extend past the
-  real coastline. Regenerate on demand with the `generate-water`
-  workflow (manual dispatch). Used only for simplified inland water;
-  the ocean is a CSS wave pattern, and the mainland is simply never
-  drawn — only the Cape renders.
+  Rendered as region-colored fills with white outlines and a name
+  label per town; colors and the municipality→region mapping live in
+  `src/lib/capeMunicipalities.js`. Town name labels use the free,
+  keyless glyph host `fonts.openmaptiles.org` (no account/API key) -
+  the only non-self-hosted runtime dependency the map has.
+
+Inland water is **removed for now**. `src/data/capeWater.json`
+(committed - OSM `natural=water` polygons intersected against the
+Cape town-land union, so it can never extend past the real coastline)
+and its `generate-water` regeneration workflow still exist; re-adding
+the layer means restoring a `water` geojson source and an
+`inland-water` fill layer in `mapStyle.js` using that data.
 
 Martha's Vineyard and Nantucket are **hidden for now** (until the
 base map is settled). Their polygons stay in the data — re-enabling
@@ -172,9 +174,9 @@ means dropping the `capeOnly` filter in `MapView` and restoring the
 `REGION_DISPLAY_OFFSET` inset shift; `locations.json` always keeps
 true coordinates either way.
 
-Locally, `npm run dev` shows the full map (land, inland water, pins,
-ocean) out of the box — both `capeTowns.json` and `capeWater.json`
-are committed data, no fetch step needed.
+Locally, `npm run dev` shows the full map (land, labels, pins, ocean)
+out of the box — `capeTowns.json` is committed data, no fetch step
+needed.
 
 The previous Google Maps implementation is preserved on the
 `backup/google-maps-map` branch.

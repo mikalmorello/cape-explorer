@@ -3,7 +3,6 @@ import Map, { Marker, Popup } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import data from '../../data/locations.json'
 import townsData from '../../data/capeTowns.json'
-import waterData from '../../data/capeWater.json'
 import { regionForArea } from '../../lib/capeRegions'
 import { REGION_DISPLAY_OFFSET } from '../../lib/capeMunicipalities'
 import { buildMapStyle, FRAME_BOUNDS, PAN_BOUNDS } from './mapStyle'
@@ -73,7 +72,7 @@ function LocationPopup({ location }) {
 export function MapView({ town = 'all' }) {
   const [selectedId, setSelectedId] = useState(null)
 
-  const mapStyle = useMemo(() => buildMapStyle(capeOnly(townsData), waterData), [])
+  const mapStyle = useMemo(() => buildMapStyle(capeOnly(townsData)), [])
 
   const locations =
     town === 'all' ? data.locations : data.locations.filter((loc) => loc.area === town)
