@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Map, { Marker } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import data from '../../data/locations.json'
@@ -122,7 +123,15 @@ export function MapView({ town = 'all' }) {
           )
         })}
       </Map>
-      {selected && <LocationPanel location={selected} onClose={() => setSelectedId(null)} />}
+      {selected &&
+        // Portaled to <body> so it escapes .map-view's stacking context
+        // (position: fixed always creates one) - otherwise its z-index
+        // would only out-rank siblings inside .map-view, not the
+        // floating header, which lives outside it in the DOM.
+        createPortal(
+          <LocationPanel location={selected} onClose={() => setSelectedId(null)} />,
+          document.body,
+        )}
     </div>
   )
 }
